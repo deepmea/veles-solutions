@@ -1,0 +1,23 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="40" rx="8" fill="url(#gradient0)"/>
+  <path d="M10 20L20 10L30 20L20 30L10 20Z" fill="white" fill-opacity="0.9"/>
+  <path d="M15 15L20 20L25 15M20 30V20" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="50" y="16" font-family="Inter, system-ui" font-size="18" font-weight="bold" fill="url(#gradient2)">VELES</text>
+  <text x="50" y="30" font-family="Inter, system-ui" font-size="10" font-weight="500" fill="#9CA3AF">RISK MANAGEMENT</text>
+  
+  <defs>
+    <linearGradient id="gradient0" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3985F6"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="gradient1" x1="15" y1="15" x2="25" y2="25" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1098F9"/>
+      <stop offset="1" stop-color="#EC4A99"/>
+    </linearGradient>
+    <linearGradient id="gradient2" x1="50" y1="0" x2="120" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3B82F6"/>
+      <stop offset="0.5" stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+</svg>

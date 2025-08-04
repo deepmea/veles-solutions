@@ -57,6 +57,11 @@ export const metadata: Metadata = {
   verification: {
     google: 'google-site-verification-code',
   },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
@@ -99,7 +104,9 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center">
-                <a href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">VELES</a>
+                <a href="/" className="flex items-center space-x-2">
+                  <img src="/logo.svg" alt="Veles Logo" className="h-8 w-auto" />
+                </a>
               </div>
               <div className="hidden md:flex items-center space-x-8">
                 <a href="#modules" className="text-gray-300 hover:text-white transition-colors">

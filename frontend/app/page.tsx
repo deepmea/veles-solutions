@@ -2,6 +2,7 @@
 
 import React from 'react';
 import DemoCharts from '../components/DemoCharts';
+import ParticleBackground from '../components/ParticleBackground';
 import { motion } from 'framer-motion';
 
 export default function HomePage() {
@@ -13,6 +14,32 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent" />
         </div>
+        
+        {/* Hero Infographic Background */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-30">
+          <img src="/hero-infographic.svg" alt="" className="w-full h-full object-cover" />
+        </div>
+        
+        {/* Particle Background */}
+        <ParticleBackground />
+        
+        {/* Floating infographics */}
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 0.6, x: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="absolute top-20 left-10 hidden lg:block"
+        >
+          <img src="/risk-analytics.svg" alt="Risk Analytics" className="w-64 h-40" />
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 0.6, x: 0 }}
+          transition={{ duration: 1, delay: 0.7 }}
+          className="absolute top-32 right-10 hidden lg:block"
+        >
+          <img src="/trading-monitor.svg" alt="Trading Monitor" className="w-64 h-40" />
+        </motion.div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -39,7 +66,7 @@ export default function HomePage() {
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="/demo-enhanced"
+                href="/demo"
                 className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:from-blue-500 hover:to-purple-500 transition-all duration-200"
               >
                 Try Demo Cabinet
@@ -58,21 +85,55 @@ export default function HomePage() {
       </section>
 
       {/* Key Features for SEO */}
-      <section className="py-12 bg-gray-850">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
+      <section className="py-12 bg-gray-900 relative">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 25% 25%, rgba(59,130,246,0.3) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(139,92,246,0.3) 0%, transparent 50%)'}}></div>
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-center bg-gray-800/50 rounded-xl p-8 border border-gray-700 hover:border-blue-500 transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
               <h3 className="text-xl font-semibold text-white mb-2">Multi-Broker Support</h3>
               <p className="text-gray-400">Manage multiple broker entities from a single dashboard</p>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-center bg-gray-800/50 rounded-xl p-8 border border-gray-700 hover:border-purple-500 transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              </div>
               <h3 className="text-xl font-semibold text-white mb-2">A-Book/B-Book Management</h3>
               <p className="text-gray-400">Smart routing and exposure management</p>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-center bg-gray-800/50 rounded-xl p-8 border border-gray-700 hover:border-green-500 transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
               <h3 className="text-xl font-semibold text-white mb-2">Compliance Ready</h3>
               <p className="text-gray-400">MiFID II, ESMA, FCA compliant reporting</p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
