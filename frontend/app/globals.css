@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Пользовательские стили */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  /* Анимации для графиков */
+  .chart-container {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  .chart-container:hover {
+    @apply transform scale-105;
+  }
+  
+  /* Градиентные фоны */
+  .gradient-primary {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600;
+  }
+  
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-green-400 to-blue-500;
+  }
+  
+  /* Кастомные тени */
+  .shadow-custom {
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Анимации */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Скроллбар */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
