@@ -211,7 +211,7 @@ export default function HomePage() {
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {apiIntegrations.map((api, index) => (
               <motion.div
                 key={api.name}
@@ -401,24 +401,45 @@ const stats = [
 
 const apiIntegrations = [
   {
-    name: 'MetaTrader 5',
-    type: 'Trading Platform',
-    icon: 'MT5',
-    description: 'Full integration with MT5 servers for real-time monitoring and risk analysis',
-    features: ['Real-time data', 'Trade monitoring', 'Risk alerts']
+    name: 'MetaTrader 4/5',
+    type: 'Trading Platforms',
+    icon: 'MT',
+    description: 'Full integration with MT4 and MT5 servers for real-time monitoring and risk analysis',
+    features: ['Real-time data', 'Trade monitoring', 'Risk alerts', 'Multi-server support']
+  },
+  {
+    name: 'Centroid',
+    type: 'Bridge Provider',
+    icon: 'CN',
+    description: 'Seamless integration with Centroid bridge for liquidity aggregation and smart routing',
+    features: ['Liquidity aggregation', 'Smart order routing', 'Risk management', 'Price feeds']
+  },
+  {
+    name: 'FX Cubic',
+    type: 'Trading System',
+    icon: 'FX',
+    description: 'Complete integration with FX Cubic for multi-asset trading and risk analytics',
+    features: ['Multi-asset support', 'Advanced analytics', 'Real-time monitoring', 'Custom reports']
+  },
+  {
+    name: 'BrokerPilot',
+    type: 'CRM System',
+    icon: 'BP',
+    description: 'Deep integration with BrokerPilot CRM for comprehensive client management',
+    features: ['Client profiling', 'Risk scoring', 'Automated alerts', 'Compliance tracking']
   },
   {
     name: 'FIX Protocol',
     type: 'Liquidity Providers',
     icon: 'FIX',
     description: 'Connect to major liquidity providers and prime brokers via FIX API',
-    features: ['Low latency', 'Order routing', 'Market data']
+    features: ['Low latency', 'Order routing', 'Market data', 'ECN connectivity']
   },
   {
     name: 'Exchange APIs',
     type: 'Crypto & Forex',
     icon: 'API',
     description: 'Direct integration with major exchanges for comprehensive market coverage',
-    features: ['Binance', 'Coinbase', 'Interactive Brokers']
+    features: ['Binance', 'Coinbase', 'Interactive Brokers', 'LMAX']
   }
 ];
