@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 export const metadata: Metadata = {
   title: 'Veles - B2B Risk Management Software for Forex Brokers | MT4/MT5 Integration',
   description: 'Professional B2B risk management system for forex brokers. Real-time monitoring, AI-powered fraud detection, multi-account detection, arbitrage prevention. Integrate with MetaTrader, cTrader, FIX API.',
-  keywords: 'B2B broker software, forex risk management, MT4 risk manager, MT5 risk management, broker risk management software, forex broker software, multi-account detection, arbitrage detection, A-book B-book management, broker CRM, forex broker solutions, MetaTrader integration, FIX API, prime broker software, liquidity management, forex broker platform, risk management system, broker back office, forex broker technology, white label broker solution',
+  keywords: 'B2B broker software, forex risk management, MT4 risk manager, MT5 risk management, broker risk management software, forex broker software, multi-account detection, arbitrage detection, A-book B-book management, broker CRM, forex broker solutions, MetaTrader integration, FIX API, prime broker software, liquidity management, forex broker platform, risk management system, broker back office, forex broker technology',
   authors: [{ name: 'Veles Solutions' }],
   creator: 'Veles Solutions',
   publisher: 'Veles Solutions',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Veles - Professional B2B Risk Management for Forex Brokers',
-    description: 'Advanced risk management system with AI-powered analytics, real-time monitoring, and multi-broker support. Trusted by 500+ brokers worldwide.',
+    description: 'Advanced risk management system with AI-powered analytics, real-time monitoring, and multi-broker support. Professional solution for brokers of all sizes.',
     url: 'https://veles.solutions',
     siteName: 'Veles Solutions',
     images: [

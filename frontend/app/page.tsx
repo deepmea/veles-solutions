@@ -33,7 +33,7 @@ export default function HomePage() {
               MT4/MT5 Integration • Multi-Account Detection • Real-time Monitoring
             </p>
             <p className="text-sm text-gray-500 mb-8">
-              Trusted by 500+ Brokers Worldwide • Since 2006
+              Professional Risk Management • Since 2006
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
@@ -342,13 +342,13 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Join 500+ Brokers Using Veles Risk Management
+              Start Managing Risk Like a Professional
             </h2>
             <p className="text-xl text-gray-300 mb-2">
               From small brokers to Tier-1 institutions
             </p>
             <p className="text-lg text-gray-400 mb-8">
-              Average ROI: 340% • Fraud Detection Rate: 97% • Setup Time: 24 hours
+              Advanced Analytics • Real-time Monitoring • Quick Setup
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
