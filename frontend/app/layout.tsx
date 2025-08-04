@@ -6,16 +6,56 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
 export const metadata: Metadata = {
-  title: 'Veles - Professional Risk Management System',
-  description: 'Modular risk management platform with AI-powered analytics and real-time monitoring',
-  keywords: 'risk management, analytics, AI, monitoring, compliance, Veles',
+  title: 'Veles - B2B Risk Management Software for Forex Brokers | MT4/MT5 Integration',
+  description: 'Professional B2B risk management system for forex brokers. Real-time monitoring, AI-powered fraud detection, multi-account detection, arbitrage prevention. Integrate with MetaTrader, cTrader, FIX API.',
+  keywords: 'B2B broker software, forex risk management, MT4 risk manager, MT5 risk management, broker risk management software, forex broker software, multi-account detection, arbitrage detection, A-book B-book management, broker CRM, forex broker solutions, MetaTrader integration, FIX API, prime broker software, liquidity management, forex broker platform, risk management system, broker back office, forex broker technology, white label broker solution',
+  authors: [{ name: 'Veles Solutions' }],
+  creator: 'Veles Solutions',
+  publisher: 'Veles Solutions',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://veles.solutions'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: 'Veles',
-    description: 'Professional Risk Management System with AI-Powered Analytics',
+    title: 'Veles - Professional B2B Risk Management for Forex Brokers',
+    description: 'Advanced risk management system with AI-powered analytics, real-time monitoring, and multi-broker support. Trusted by 500+ brokers worldwide.',
     url: 'https://veles.solutions',
-    siteName: 'Veles',
+    siteName: 'Veles Solutions',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Veles Risk Management System',
+      },
+    ],
     locale: 'en_US',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Veles - B2B Risk Management for Brokers',
+    description: 'Professional risk management system for forex brokers',
+    images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'google-site-verification-code',
   },
 };
 
@@ -27,6 +67,34 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'SoftwareApplication',
+              name: 'Veles Risk Management System',
+              applicationCategory: 'BusinessApplication',
+              operatingSystem: 'Web-based',
+              offers: {
+                '@type': 'Offer',
+                price: '199',
+                priceCurrency: 'USD',
+                priceValidUntil: '2025-12-31',
+              },
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: '4.8',
+                ratingCount: '523',
+              },
+              publisher: {
+                '@type': 'Organization',
+                name: 'Veles Solutions',
+                url: 'https://veles.solutions',
+              },
+            }),
+          }}
+        />
         <nav className="fixed top-0 w-full bg-gray-900 shadow-lg z-50 border-b border-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">

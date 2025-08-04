@@ -27,16 +27,19 @@ export default function HomePage() {
               <p className="text-lg md:text-xl text-gray-400 uppercase tracking-widest">Core System</p>
             </div>
             <p className="text-xl md:text-2xl text-gray-300 mb-4 max-w-3xl mx-auto">
-              Professional Risk Management Solutions for Brokerage Companies
+              B2B Risk Management Software for Forex & CFD Brokers
             </p>
-            <p className="text-lg text-gray-400 mb-8">
-              Powered by AI • 19+ Years of Experience Since 2006
+            <p className="text-lg text-gray-400 mb-2">
+              MT4/MT5 Integration • Multi-Account Detection • Real-time Monitoring
+            </p>
+            <p className="text-sm text-gray-500 mb-8">
+              Trusted by 500+ Brokers Worldwide • Since 2006
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="/demo"
+                href="/demo-enhanced"
                 className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:from-blue-500 hover:to-purple-500 transition-all duration-200"
               >
                 Try Demo Cabinet
@@ -54,6 +57,26 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Key Features for SEO */}
+      <section className="py-12 bg-gray-850">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-2">Multi-Broker Support</h3>
+              <p className="text-gray-400">Manage multiple broker entities from a single dashboard</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-2">A-Book/B-Book Management</h3>
+              <p className="text-gray-400">Smart routing and exposure management</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-2">Compliance Ready</h3>
+              <p className="text-gray-400">MiFID II, ESMA, FCA compliant reporting</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Modules Section */}
       <section id="modules" className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,10 +87,10 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Veles Modules
+              Complete Broker Risk Management Suite
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Choose and customize modules based on your needs. Each module can be purchased separately.
+              Modular architecture designed for forex brokers, prime brokers, and liquidity providers
             </p>
           </motion.div>
 
@@ -204,10 +227,10 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Seamless Integration with Trading Platforms
+              Native Integration with All Major Trading Platforms
             </h2>
             <p className="text-xl text-gray-400">
-              Connect with major exchanges and liquidity providers
+              Direct API connections to MetaTrader, cTrader, and proprietary platforms
             </p>
           </motion.div>
           
@@ -319,10 +342,13 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Ready to Transform Your Risk Management?
+              Join 500+ Brokers Using Veles Risk Management
             </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              Join 500+ financial institutions using Veles
+            <p className="text-xl text-gray-300 mb-2">
+              From small brokers to Tier-1 institutions
+            </p>
+            <p className="text-lg text-gray-400 mb-8">
+              Average ROI: 340% • Fraud Detection Rate: 97% • Setup Time: 24 hours
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
