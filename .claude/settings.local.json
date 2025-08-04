@@ -26,7 +26,8 @@
       "Bash(find:*)",
       "Bash(git reset:*)",
       "Bash(npx vercel:*)",
-      "WebFetch(domain:veles-solutions.vercel.app)"
+      "WebFetch(domain:veles-solutions.vercel.app)",
+      "Bash(npm audit:*)"
     ],
     "deny": []
   }

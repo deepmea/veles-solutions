@@ -3,9 +3,7 @@ const nextConfig = {
   poweredByHeader: false, // Hide X-Powered-By header
   reactStrictMode: true,
   
-  experimental: {
-    appDir: true,
-  },
+  // App directory is now stable in Next.js 14
   
   images: {
     domains: ['localhost', 'vmcom.app', 'veles.solutions'],
@@ -15,7 +13,7 @@ const nextConfig = {
   
   env: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:3000',
-    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'your-secret-key-here',
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'veles-secret-key-change-in-production-2025',
     API_URL: process.env.API_URL || 'http://localhost:8000',
   },
   
@@ -59,6 +57,11 @@ const nextConfig = {
   
   // Compress output
   compress: true,
+  
+  // Generate build ID for cache busting
+  generateBuildId: async () => {
+    return `build-${Date.now()}`;
+  },
 }
 
 module.exports = nextConfig

@@ -44,5 +44,10 @@
       ]
     }
   ],
-  "regions": ["iad1"]
+  "regions": ["iad1"],
+  "github": {
+    "silent": true
+  },
+  "cleanUrls": true,
+  "trailingSlash": false
 }
