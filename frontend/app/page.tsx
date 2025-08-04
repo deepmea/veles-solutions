@@ -470,9 +470,9 @@ const modules = [
 ];
 
 const metrics = [
-  { label: 'Risk Score', value: '87.3', unit: '%', change: '+2.4%', trend: 'up', sparkline: '0,30 20,25 40,15 60,20 80,10 100,5' },
-  { label: 'Active Monitoring', value: '1,247', unit: 'clients', change: '+145', trend: 'up', sparkline: '0,20 20,25 40,30 60,28 80,35 100,40' },
-  { label: 'Alerts Today', value: '23', unit: 'critical', change: '-8', trend: 'down', sparkline: '0,40 20,35 40,30 60,25 80,20 100,15' }
+  { label: 'Risk Reduction', value: '73.2', unit: '%', change: '-65%', trend: 'down', sparkline: '0,40 20,35 40,25 60,18 80,12 100,5' },
+  { label: 'Clean Clients', value: '1,189', unit: 'verified', change: '+847', trend: 'up', sparkline: '0,20 20,35 40,50 60,65 80,78 100,85' },
+  { label: 'Daily Alerts', value: '4', unit: 'critical', change: '-86%', trend: 'down', sparkline: '0,40 20,38 40,28 60,18 80,8 100,2' }
 ];
 
 const techStack = [

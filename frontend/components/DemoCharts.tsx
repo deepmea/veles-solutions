@@ -8,45 +8,50 @@ import {
 
 // Fake data generator
 const generateFakeData = () => {
-  // Suspicious clients data
+  // Suspicious clients data - showing improvement after Veles implementation
   const suspiciousClientsData = [
-    { month: 'January', detected: 45, verified: 42, confirmed: 38 },
-    { month: 'February', detected: 52, verified: 48, confirmed: 41 },
-    { month: 'March', detected: 61, verified: 58, confirmed: 52 },
-    { month: 'April', detected: 68, verified: 64, confirmed: 57 },
-    { month: 'May', detected: 75, verified: 71, confirmed: 63 },
-    { month: 'June', detected: 83, verified: 79, confirmed: 72 },
+    { month: 'Jan (Pre)', detected: 85, verified: 79, confirmed: 72, period: 'Before Veles' },
+    { month: 'Feb (Pre)', detected: 92, verified: 88, confirmed: 81, period: 'Before Veles' },
+    { month: 'Mar (Impl)', detected: 78, verified: 71, confirmed: 63, period: 'Implementation' },
+    { month: 'Apr', detected: 65, verified: 58, confirmed: 48, period: 'After Veles' },
+    { month: 'May', detected: 52, verified: 45, confirmed: 35, period: 'After Veles' },
+    { month: 'Jun', detected: 41, verified: 35, confirmed: 26, period: 'After Veles' },
   ];
 
-  // Risk analysis by server
+  // Risk analysis by server - improved after Veles
   const riskByServer = [
-    { server: 'MT5-PRO', high: 12, medium: 25, low: 45, normal: 167 },
-    { server: 'MT5-ECN', high: 8, medium: 18, low: 38, normal: 142 },
-    { server: 'MT5-DEMO', high: 3, medium: 12, low: 28, normal: 89 },
-    { server: 'MT5-PRIME', high: 15, medium: 32, low: 52, normal: 201 },
+    { server: 'Trading-PRO', high: 2, medium: 8, low: 18, normal: 224 },
+    { server: 'Trading-ECN', high: 1, medium: 5, low: 12, normal: 188 },
+    { server: 'Trading-DEMO', high: 0, medium: 2, low: 6, normal: 124 },
+    { server: 'Trading-PRIME', high: 3, medium: 9, low: 21, normal: 267 },
   ];
 
-  // Detection efficiency
+  // Detection efficiency - improved with Veles
   const detectionEfficiency = [
-    { name: 'False Positives', value: 12, color: '#6366f1' },
-    { name: 'Confirmed Threats', value: 73, color: '#8b5cf6' },
-    { name: 'Pending Review', value: 15, color: '#a78bfa' },
+    { name: 'False Positives', value: 5, color: '#ef4444' },
+    { name: 'Clean Clients', value: 87, color: '#10b981' },
+    { name: 'Under Review', value: 8, color: '#f59e0b' },
   ];
 
-  // Activity dynamics
-  const activityDynamics = Array.from({ length: 24 }, (_, i) => ({
-    time: `${i}:00`,
-    activity: Math.floor(Math.random() * 100) + 20,
-    suspicious: Math.floor(Math.random() * 20) + 5,
-  }));
+  // Activity dynamics - showing decreased suspicious activity
+  const activityDynamics = Array.from({ length: 24 }, (_, i) => {
+    // Higher suspicious activity in early hours, then decreasing after Veles monitoring
+    const baseSuspicious = i < 8 ? 15 : (i < 16 ? 8 : 4);
+    const variation = Math.floor(Math.random() * 3);
+    return {
+      time: `${i}:00`,
+      activity: Math.floor(Math.random() * 80) + 40,
+      suspicious: Math.max(1, baseSuspicious + variation - Math.floor(i / 4)),
+    };
+  });
 
-  // Violation types
+  // Violation types - significant reduction after implementation
   const violationTypes = [
-    { type: 'Manipulation', count: 42 },
-    { type: 'Arbitrage', count: 38 },
-    { type: 'Scalping', count: 31 },
-    { type: 'Martingale', count: 27 },
-    { type: 'Other', count: 19 },
+    { type: 'Prevented', count: 156, color: '#10b981' },
+    { type: 'Manipulation', count: 8, color: '#ef4444' },
+    { type: 'Arbitrage', count: 5, color: '#f59e0b' },
+    { type: 'Scalping', count: 3, color: '#8b5cf6' },
+    { type: 'Other', count: 2, color: '#6b7280' },
   ];
 
   return {
@@ -79,8 +84,9 @@ const DemoCharts: React.FC = () => {
       {/* Suspicious clients detection dynamics */}
       <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
         <h3 className="text-lg font-semibold mb-4 text-white">
-          Suspicious Client Detection Dynamics
+          Risk Reduction After Veles Implementation
         </h3>
+        <p className="text-sm text-gray-400 mb-4">↓ 68% reduction in suspicious activity</p>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={data.suspiciousClientsData} key={`line-${animationKey}`}>
             <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
@@ -125,8 +131,9 @@ const DemoCharts: React.FC = () => {
       {/* Risk distribution by servers */}
       <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
         <h3 className="text-lg font-semibold mb-4 text-white">
-          Risk Distribution by Trading Servers
+          Server Risk Status - Post Implementation
         </h3>
+        <p className="text-sm text-gray-400 mb-4">↓ 85% reduction in high-risk clients</p>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data.riskByServer} key={`bar-${animationKey}`}>
             <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
@@ -140,7 +147,7 @@ const DemoCharts: React.FC = () => {
             <Bar dataKey="high" stackId="a" fill="#dc2626" animationDuration={800} name="High Risk" />
             <Bar dataKey="medium" stackId="a" fill="#f97316" animationDuration={1000} name="Medium Risk" />
             <Bar dataKey="low" stackId="a" fill="#3b82f6" animationDuration={1200} name="Low Risk" />
-            <Bar dataKey="normal" stackId="a" fill="#1f2937" animationDuration={1400} name="Normal" />
+            <Bar dataKey="normal" stackId="a" fill="#10b981" animationDuration={1400} name="Clean" />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -148,8 +155,9 @@ const DemoCharts: React.FC = () => {
       {/* Detection system efficiency */}
       <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
         <h3 className="text-lg font-semibold mb-4 text-white">
-          Detection System Efficiency
+          System Performance Results
         </h3>
+        <p className="text-sm text-gray-400 mb-4">✓ 95% accuracy with minimal false positives</p>
         <ResponsiveContainer width="100%" height={300}>
           <PieChart key={`pie-${animationKey}`}>
             <Pie
@@ -190,8 +198,9 @@ const DemoCharts: React.FC = () => {
       {/* Real-time activity monitoring */}
       <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
         <h3 className="text-lg font-semibold mb-4 text-white">
-          24-Hour Activity Monitoring
+          Suspicious Activity Suppression
         </h3>
+        <p className="text-sm text-gray-400 mb-4">↓ Real-time prevention in action</p>
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={data.activityDynamics} key={`area-${animationKey}`}>
             <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
