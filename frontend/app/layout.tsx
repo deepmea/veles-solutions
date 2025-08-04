@@ -5,15 +5,15 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
 export const metadata: Metadata = {
-  title: 'VelesManager - Интеллектуальная система мониторинга',
-  description: 'Профессиональная система анализа и мониторинга торговых операций',
-  keywords: 'мониторинг, аналитика, риск-менеджмент, торговля, VelesManager',
+  title: 'Veles - Professional Risk Management System',
+  description: 'Modular risk management platform with AI-powered analytics and real-time monitoring',
+  keywords: 'risk management, analytics, AI, monitoring, compliance, Veles',
   openGraph: {
-    title: 'VelesManager',
-    description: 'Интеллектуальная система мониторинга и анализа торговых операций',
+    title: 'Veles',
+    description: 'Professional Risk Management System with AI-Powered Analytics',
     url: 'https://veles.solutions',
-    siteName: 'VelesManager',
-    locale: 'ru_RU',
+    siteName: 'Veles',
+    locale: 'en_US',
     type: 'website',
   },
 };
@@ -26,28 +26,28 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={inter.className}>
-        <nav className="fixed top-0 w-full bg-white shadow-sm z-50">
+        <nav className="fixed top-0 w-full bg-gray-900 shadow-lg z-50 border-b border-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center">
-                <span className="text-2xl font-bold text-blue-600">VelesManager</span>
+                <a href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">VELES</a>
               </div>
               <div className="hidden md:flex items-center space-x-8">
-                <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors">
-                  Возможности
+                <a href="#modules" className="text-gray-300 hover:text-white transition-colors">
+                  Modules
                 </a>
-                <a href="#demo" className="text-gray-700 hover:text-blue-600 transition-colors">
-                  Демо
+                <a href="#demo" className="text-gray-300 hover:text-white transition-colors">
+                  Demo
                 </a>
-                <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors">
-                  Тарифы
+                <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">
+                  Pricing
                 </a>
-                <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">
-                  Контакты
+                <a href="#contact" className="text-gray-300 hover:text-white transition-colors">
+                  Contact
                 </a>
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                  Войти
-                </button>
+                <a href="/demo" className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md hover:from-blue-500 hover:to-purple-500 transition-all">
+                  Try Demo
+                </a>
               </div>
             </div>
           </div>
@@ -59,38 +59,38 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
-                <h3 className="text-xl font-bold mb-4">VelesManager</h3>
+                <h3 className="text-xl font-bold mb-4">VELES</h3>
                 <p className="text-gray-400">
-                  Профессиональное решение для мониторинга и анализа
+                  Professional Risk Management System
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold mb-4">Продукт</h4>
+                <h4 className="font-semibold mb-4">Product</h4>
                 <ul className="space-y-2 text-gray-400">
-                  <li><a href="#" className="hover:text-white">Возможности</a></li>
-                  <li><a href="#" className="hover:text-white">Тарифы</a></li>
+                  <li><a href="#" className="hover:text-white">Modules</a></li>
+                  <li><a href="#" className="hover:text-white">Pricing</a></li>
                   <li><a href="#" className="hover:text-white">API</a></li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold mb-4">Компания</h4>
+                <h4 className="font-semibold mb-4">Company</h4>
                 <ul className="space-y-2 text-gray-400">
-                  <li><a href="#" className="hover:text-white">О нас</a></li>
-                  <li><a href="#" className="hover:text-white">Блог</a></li>
-                  <li><a href="#" className="hover:text-white">Карьера</a></li>
+                  <li><a href="#" className="hover:text-white">About</a></li>
+                  <li><a href="#" className="hover:text-white">Blog</a></li>
+                  <li><a href="#" className="hover:text-white">Careers</a></li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold mb-4">Поддержка</h4>
+                <h4 className="font-semibold mb-4">Support</h4>
                 <ul className="space-y-2 text-gray-400">
-                  <li><a href="#" className="hover:text-white">Документация</a></li>
-                  <li><a href="#" className="hover:text-white">Контакты</a></li>
+                  <li><a href="#" className="hover:text-white">Documentation</a></li>
+                  <li><a href="#" className="hover:text-white">Contact</a></li>
                   <li><a href="#" className="hover:text-white">FAQ</a></li>
                 </ul>
               </div>
             </div>
             <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
-              <p>&copy; 2024 VelesManager. Все права защищены.</p>
+              <p>&copy; 2025 Veles. All rights reserved.</p>
             </div>
           </div>
         </footer>
