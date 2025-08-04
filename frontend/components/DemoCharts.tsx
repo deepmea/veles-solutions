@@ -28,9 +28,9 @@ const generateFakeData = () => {
 
   // Detection efficiency
   const detectionEfficiency = [
-    { name: 'False Positives', value: 12, color: '#ef4444' },
-    { name: 'Confirmed Threats', value: 73, color: '#10b981' },
-    { name: 'Pending Review', value: 15, color: '#f59e0b' },
+    { name: 'False Positives', value: 12, color: '#6366f1' },
+    { name: 'Confirmed Threats', value: 73, color: '#8b5cf6' },
+    { name: 'Pending Review', value: 15, color: '#a78bfa' },
   ];
 
   // Activity dynamics
@@ -94,26 +94,29 @@ const DemoCharts: React.FC = () => {
             <Line 
               type="monotone" 
               dataKey="detected" 
-              stroke="#ef4444" 
+              stroke="#818cf8" 
               strokeWidth={2}
               animationDuration={1000}
-              dot={{ fill: '#ef4444', r: 4 }}
+              dot={{ fill: '#818cf8', r: 4 }}
+              name="Detected"
             />
             <Line 
               type="monotone" 
               dataKey="verified" 
-              stroke="#f59e0b" 
+              stroke="#a78bfa" 
               strokeWidth={2}
               animationDuration={1200}
-              dot={{ fill: '#f59e0b', r: 4 }}
+              dot={{ fill: '#a78bfa', r: 4 }}
+              name="Verified"
             />
             <Line 
               type="monotone" 
               dataKey="confirmed" 
-              stroke="#10b981" 
+              stroke="#c084fc" 
               strokeWidth={2}
               animationDuration={1400}
-              dot={{ fill: '#10b981', r: 4 }}
+              dot={{ fill: '#c084fc', r: 4 }}
+              name="Confirmed"
             />
           </LineChart>
         </ResponsiveContainer>
@@ -134,10 +137,10 @@ const DemoCharts: React.FC = () => {
               labelStyle={{ color: '#f3f4f6' }}
             />
             <Legend />
-            <Bar dataKey="high" stackId="a" fill="#ef4444" animationDuration={800} />
-            <Bar dataKey="medium" stackId="a" fill="#f59e0b" animationDuration={1000} />
-            <Bar dataKey="low" stackId="a" fill="#3b82f6" animationDuration={1200} />
-            <Bar dataKey="normal" stackId="a" fill="#10b981" animationDuration={1400} />
+            <Bar dataKey="high" stackId="a" fill="#dc2626" animationDuration={800} name="High Risk" />
+            <Bar dataKey="medium" stackId="a" fill="#f97316" animationDuration={1000} name="Medium Risk" />
+            <Bar dataKey="low" stackId="a" fill="#3b82f6" animationDuration={1200} name="Low Risk" />
+            <Bar dataKey="normal" stackId="a" fill="#1f2937" animationDuration={1400} name="Normal" />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -203,19 +206,21 @@ const DemoCharts: React.FC = () => {
               type="monotone" 
               dataKey="activity" 
               stackId="1" 
-              stroke="#3b82f6" 
-              fill="#3b82f6" 
-              fillOpacity={0.6}
+              stroke="#6366f1" 
+              fill="#6366f1" 
+              fillOpacity={0.4}
               animationDuration={1000}
+              name="Normal Activity"
             />
             <Area 
               type="monotone" 
               dataKey="suspicious" 
               stackId="1" 
-              stroke="#ef4444" 
-              fill="#ef4444" 
-              fillOpacity={0.8}
+              stroke="#8b5cf6" 
+              fill="#8b5cf6" 
+              fillOpacity={0.6}
               animationDuration={1200}
+              name="Suspicious Activity"
             />
           </AreaChart>
         </ResponsiveContainer>
