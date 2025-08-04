@@ -288,10 +288,13 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Native Integration with All Major Trading Platforms
+              Universal Platform Integration
             </h2>
-            <p className="text-xl text-gray-400">
-              Direct API connections to MetaTrader, cTrader, and proprietary platforms
+            <p className="text-xl text-gray-400 mb-4">
+              Connect with major trading platforms, bridge systems, and proprietary solutions
+            </p>
+            <p className="text-sm text-gray-500 italic">
+              * All mentioned third-party platforms and systems are trademarks of their respective owners. Veles provides integration capabilities but is not affiliated with these companies.
             </p>
           </motion.div>
           
@@ -445,9 +448,9 @@ const modules = [
   },
   {
     title: 'Custom Reports',
-    description: 'Professional reporting and export module',
+    description: 'Build reports from any company data source',
     icon: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>,
-    features: ['PDF/Excel export', 'Scheduled reports', 'Custom templates'],
+    features: ['Any data source', 'Custom formats', 'Automated delivery', 'Regulatory compliance'],
     price: '$199/mo'
   },
   {
@@ -488,45 +491,45 @@ const stats = [
 
 const apiIntegrations = [
   {
-    name: 'MetaTrader 4/5',
-    type: 'Trading Platforms',
+    name: 'Trading Platforms',
+    type: 'MT4/MT5/cTrader',
     icon: 'MT',
-    description: 'Full integration with MT4 and MT5 servers for real-time monitoring and risk analysis',
-    features: ['Real-time data', 'Trade monitoring', 'Risk alerts', 'Multi-server support']
+    description: 'Connect with major retail trading platforms for real-time monitoring and risk management',
+    features: ['Real-time feeds', 'Trade monitoring', 'Risk alerts', 'Multi-server support']
   },
   {
-    name: 'Centroid',
-    type: 'Bridge Provider',
-    icon: 'CN',
-    description: 'Seamless integration with Centroid bridge for liquidity aggregation and smart routing',
-    features: ['Liquidity aggregation', 'Smart order routing', 'Risk management', 'Price feeds']
+    name: 'Bridge Systems',
+    type: 'Liquidity Bridges',
+    icon: 'BR',
+    description: 'Integrate with leading bridge solutions for liquidity aggregation and smart order routing',
+    features: ['Price aggregation', 'Smart routing', 'Latency optimization', 'Multiple LPs']
   },
   {
-    name: 'FX Cubic',
-    type: 'Trading System',
-    icon: 'FX',
-    description: 'Complete integration with FX Cubic for multi-asset trading and risk analytics',
-    features: ['Multi-asset support', 'Advanced analytics', 'Real-time monitoring', 'Custom reports']
+    name: 'CRM Systems',
+    type: 'Client Management',
+    icon: 'CRM',
+    description: 'Connect with popular broker CRM systems for comprehensive client data analysis',
+    features: ['Client profiling', 'Risk scoring', 'Automated workflows', 'Compliance tracking']
   },
   {
-    name: 'BrokerPilot',
-    type: 'CRM System',
-    icon: 'BP',
-    description: 'Deep integration with BrokerPilot CRM for comprehensive client management',
-    features: ['Client profiling', 'Risk scoring', 'Automated alerts', 'Compliance tracking']
+    name: 'Back Office',
+    type: 'Operations',
+    icon: 'BO',
+    description: 'Seamless integration with back office systems for complete operational oversight',
+    features: ['Trade processing', 'Settlement', 'Reconciliation', 'Reporting']
   },
   {
     name: 'FIX Protocol',
-    type: 'Liquidity Providers',
+    type: 'Institutional',
     icon: 'FIX',
-    description: 'Connect to major liquidity providers and prime brokers via FIX API',
+    description: 'Professional FIX connectivity for prime brokers and institutional liquidity providers',
     features: ['Low latency', 'Order routing', 'Market data', 'ECN connectivity']
   },
   {
-    name: 'Exchange APIs',
-    type: 'Crypto & Forex',
+    name: 'Custom APIs',
+    type: 'Proprietary',
     icon: 'API',
-    description: 'Direct integration with major exchanges for comprehensive market coverage',
-    features: ['Binance', 'Coinbase', 'Interactive Brokers', 'LMAX']
+    description: 'Flexible API framework for custom integrations with proprietary systems',
+    features: ['REST/GraphQL', 'WebSockets', 'Custom protocols', 'Legacy systems']
   }
 ];

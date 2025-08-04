@@ -167,6 +167,10 @@ export default function RootLayout({
             </div>
             <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
               <p>&copy; 2025 Veles. All rights reserved.</p>
+              <p className="text-xs mt-2 text-gray-500">
+                MetaTrader, cTrader, FIX Protocol, and other mentioned platforms are trademarks of their respective owners. 
+                Veles is an independent software provider and is not affiliated with or endorsed by these companies.
+              </p>
             </div>
           </div>
         </footer>

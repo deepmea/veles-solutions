@@ -28,7 +28,9 @@
       "Bash(npx vercel:*)",
       "WebFetch(domain:veles-solutions.vercel.app)",
       "Bash(npm audit:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:www.veles.solutions)"
     ],
     "deny": []
   }
