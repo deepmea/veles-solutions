@@ -128,11 +128,11 @@ export default function HomePage() {
             >
               <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Compliance Ready</h3>
-              <p className="text-gray-400">MiFID II, ESMA, FCA compliant reporting</p>
+              <h3 className="text-xl font-semibold text-white mb-2">Custom Reports</h3>
+              <p className="text-gray-400">Generate reports from any available data source</p>
             </motion.div>
           </div>
         </div>
