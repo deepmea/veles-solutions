@@ -37,14 +37,14 @@ export default function DemoPage() {
       ];
     } else if (reportType === 'activity') {
       return [
-        { time: '00:00', trades: 234, volume: 1250000, alerts: 3 },
-        { time: '04:00', trades: 156, volume: 890000, alerts: 1 },
-        { time: '08:00', trades: 478, volume: 3400000, alerts: 8 },
-        { time: '12:00', trades: 612, volume: 4500000, alerts: 12 },
-        { time: '16:00', trades: 534, volume: 3900000, alerts: 9 },
-        { time: '20:00', trades: 423, volume: 2800000, alerts: 6 },
+        { time: '00:00', trades: 234, volume: 1250000, alerts: 3, revenue: 15600, profit: 8900 },
+        { time: '04:00', trades: 156, volume: 890000, alerts: 1, revenue: 11200, profit: 6800 },
+        { time: '08:00', trades: 478, volume: 3400000, alerts: 8, revenue: 42500, profit: 28900 },
+        { time: '12:00', trades: 612, volume: 4500000, alerts: 12, revenue: 56200, profit: 38900 },
+        { time: '16:00', trades: 534, volume: 3900000, alerts: 9, revenue: 48900, profit: 32100 },
+        { time: '20:00', trades: 423, volume: 2800000, alerts: 6, revenue: 35100, profit: 22800 },
       ];
-    } else {
+    } else if (reportType === 'performance') {
       return [
         { metric: 'Risk Score', current: 87, previous: 82, target: 85 },
         { metric: 'Compliance', current: 94, previous: 91, target: 95 },
@@ -52,38 +52,103 @@ export default function DemoPage() {
         { metric: 'Accuracy', current: 96, previous: 94, target: 95 },
         { metric: 'Response Time', current: 92, previous: 88, target: 90 },
       ];
+    } else if (reportType === 'revenue') {
+      return [
+        { month: 'Jan', revenue: 450000, costs: 280000, profit: 170000, clientCount: 1247 },
+        { month: 'Feb', revenue: 520000, costs: 315000, profit: 205000, clientCount: 1289 },
+        { month: 'Mar', revenue: 580000, costs: 340000, profit: 240000, clientCount: 1356 },
+        { month: 'Apr', revenue: 620000, costs: 365000, profit: 255000, clientCount: 1423 },
+        { month: 'May', revenue: 680000, costs: 390000, profit: 290000, clientCount: 1498 },
+        { month: 'Jun', revenue: 720000, costs: 410000, profit: 310000, clientCount: 1587 },
+      ];
+    } else {
+      return [
+        { symbol: 'EURUSD', volume: 45600000, trades: 12500, profit: 125000, spread: 0.8 },
+        { symbol: 'GBPUSD', volume: 32400000, trades: 8900, profit: 89000, spread: 1.2 },
+        { symbol: 'USDJPY', volume: 28900000, trades: 7800, profit: 78000, spread: 0.9 },
+        { symbol: 'AUDUSD', volume: 22100000, trades: 6200, profit: 62000, spread: 1.1 },
+        { symbol: 'USDCAD', volume: 18600000, trades: 5100, profit: 51000, spread: 1.3 },
+        { symbol: 'GOLD', volume: 15400000, trades: 4300, profit: 65000, spread: 2.1 },
+      ];
     }
   };
 
-  // Generate enhanced suspicious clients with financial data
+  // Generate enhanced suspicious clients with comprehensive financial data
   const generateSuspiciousClients = () => {
-    const names = ['John Smith', 'Elena Petrova', 'Michael Chen', 'Sarah Johnson', 'Alex Wong', 'Maria Garcia', 'David Kim', 'Anna Mueller'];
-    const servers = ['MT5-PRO', 'MT5-ECN', 'MT5-PRIME', 'MT5-DEMO'];
-    const types = ['High-frequency trading', 'Arbitrage patterns', 'Martingale usage', 'Price manipulation', 'News trading', 'Scalping abuse'];
-    const statuses = ['Confirmed', 'Investigating', 'Monitoring', 'Cleared'];
+    const names = [
+      'John Smith', 'Elena Petrova', 'Michael Chen', 'Sarah Johnson', 'Alex Wong', 'Maria Garcia', 'David Kim', 'Anna Mueller',
+      'James Wilson', 'Sofia Kowalski', 'Hiroshi Tanaka', 'Isabella Rodriguez', 'Ahmed Hassan', 'Natasha Volkov', 'Lars Jensen', 
+      'Priya Sharma', 'Antonio Silva', 'Yuki Nakamura', 'Emma Thompson', 'Carlos Mendez', 'Olga Petrov', 'Marco Rossi',
+      'Li Wei', 'Sophie Laurent', 'Dmitri Kozlov', 'Fatima Al-Rashid', 'Hans Mueller', 'Anastasia Popov', 'Raj Patel'
+    ];
+    const servers = ['Trading-PRO', 'Trading-ECN', 'Trading-PRIME', 'Trading-DEMO', 'Trading-VIP', 'Trading-STP', 'Trading-CENT'];
+    const types = [
+      'High-frequency arbitrage', 'Latency arbitrage', 'Price feed arbitrage', 'News trading patterns', 'Scalping abuse',
+      'Martingale progression', 'Grid trading', 'Hedging violations', 'Swap arbitrage', 'Weekend gap trading',
+      'Market manipulation', 'Pump & dump', 'Wash trading', 'Spoofing', 'Quote stuffing', 'Cross-market arbitrage'
+    ];
+    const statuses = ['High Risk', 'Under Review', 'Monitoring', 'Flagged', 'Verified Risk', 'Pending Action'];
     
-    return Array.from({ length: Math.floor(Math.random() * 8) + 3 }, (_, i) => {
-      const balance = Math.floor(Math.random() * 500000) + 10000;
-      const equity = balance + Math.floor(Math.random() * 100000) - 50000;
-      const margin = Math.floor(Math.random() * balance * 0.3);
+    return Array.from({ length: Math.floor(Math.random() * 25) + 15 }, (_, i) => {
+      const balance = Math.floor(Math.random() * 2000000) + 25000;
+      const equity = balance + Math.floor(Math.random() * 300000) - 150000;
+      const margin = Math.floor(Math.random() * balance * 0.4);
       const freeMargin = equity - margin;
+      const totalTurnover = Math.floor(Math.random() * 50000000) + 5000000;
+      const dailyVolume = Math.floor(Math.random() * 5000000) + 500000;
+      const spreadCost = Math.floor(Math.random() * 25000) + 2000;
+      const profitPerMillion = ((Math.random() - 0.3) * 2000).toFixed(2); // Can be negative
       
-      // Generate time-series data
-      const equityCurve = Array.from({ length: 30 }, (_, j) => ({
+      // Generate comprehensive time-series data
+      const equityCurve = Array.from({ length: 90 }, (_, j) => ({
         day: j + 1,
-        equity: balance + Math.floor(Math.random() * 50000) - 25000 + (j * 1000)
+        equity: balance + Math.floor(Math.random() * 100000) - 50000 + (j * (Math.random() - 0.5) * 2000),
+        balance: balance + Math.floor(Math.random() * 50000) - 25000,
+        profit: (Math.random() - 0.4) * 10000,
+        drawdown: Math.random() * 20000
       }));
       
-      const exposureData = Array.from({ length: 24 }, (_, h) => ({
-        hour: h,
-        exposure: Math.floor(Math.random() * 100000) + 10000
+      // Deposit/Withdrawal dynamics
+      const cashflowData = Array.from({ length: 30 }, (_, d) => ({
+        day: d + 1,
+        deposits: Math.floor(Math.random() * 50000),
+        withdrawals: Math.floor(Math.random() * 30000),
+        netFlow: Math.floor(Math.random() * 40000) - 20000
       }));
+      
+      // Trading volume by hour
+      const hourlyVolumeData = Array.from({ length: 24 }, (_, h) => ({
+        hour: h,
+        volume: Math.floor(Math.random() * dailyVolume / 24) + (dailyVolume / 48),
+        trades: Math.floor(Math.random() * 200) + 10,
+        avgSize: Math.floor(Math.random() * 50000) + 5000,
+        exposure: Math.floor(Math.random() * 200000) + 50000
+      }));
+      
+      // Spread cost analysis
+      const spreadAnalysis = Array.from({ length: 10 }, (_, s) => ({
+        symbol: ['EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD', 'USDCAD', 'NZDUSD', 'EURGBP', 'EURJPY', 'GBPJPY', 'GOLD'][s],
+        volume: Math.floor(Math.random() * 1000000) + 100000,
+        spreadPaid: Math.floor(Math.random() * 5000) + 500,
+        avgSpread: (Math.random() * 3 + 0.5).toFixed(1),
+        markout: ((Math.random() - 0.5) * 2).toFixed(2)
+      }));
+      
+      // Profit distribution by instrument
+      const profitByInstrument = [
+        { name: 'EURUSD', profit: Math.floor(Math.random() * 20000) - 10000, volume: Math.floor(Math.random() * 2000000) + 500000 },
+        { name: 'GBPUSD', profit: Math.floor(Math.random() * 15000) - 7500, volume: Math.floor(Math.random() * 1500000) + 300000 },
+        { name: 'GOLD', profit: Math.floor(Math.random() * 25000) - 12500, volume: Math.floor(Math.random() * 1000000) + 200000 },
+        { name: 'USDJPY', profit: Math.floor(Math.random() * 12000) - 6000, volume: Math.floor(Math.random() * 800000) + 150000 },
+        { name: 'Others', profit: Math.floor(Math.random() * 10000) - 5000, volume: Math.floor(Math.random() * 600000) + 100000 }
+      ];
       
       const tradeDistribution = [
-        { name: 'Forex', value: 45, color: '#6366f1' },
-        { name: 'Indices', value: 30, color: '#8b5cf6' },
-        { name: 'Commodities', value: 15, color: '#a78bfa' },
-        { name: 'Crypto', value: 10, color: '#c084fc' }
+        { name: 'Forex', value: Math.floor(Math.random() * 30) + 40, color: '#6366f1', volume: Math.floor(Math.random() * 3000000) + 1000000 },
+        { name: 'Indices', value: Math.floor(Math.random() * 20) + 20, color: '#8b5cf6', volume: Math.floor(Math.random() * 2000000) + 500000 },
+        { name: 'Commodities', value: Math.floor(Math.random() * 15) + 10, color: '#a78bfa', volume: Math.floor(Math.random() * 1000000) + 200000 },
+        { name: 'Crypto', value: Math.floor(Math.random() * 10) + 5, color: '#c084fc', volume: Math.floor(Math.random() * 800000) + 100000 },
+        { name: 'Bonds', value: Math.floor(Math.random() * 8) + 2, color: '#f59e0b', volume: Math.floor(Math.random() * 500000) + 50000 }
       ];
       
       // Market Impact Analysis for Arbitrage Detection
@@ -119,11 +184,11 @@ export default function DemoPage() {
         riskScore: Math.floor(Math.random() * 40) + 60,
         suspiciousType: types[Math.floor(Math.random() * types.length)],
         lastActivity: new Date(Date.now() - Math.random() * 86400000 * 7).toISOString(),
-        tradingVolume: Math.floor(Math.random() * 1000000) + 50000,
-        profitLoss: Math.floor(Math.random() * 200000) - 50000,
+        tradingVolume: dailyVolume,
+        profitLoss: Math.floor(Math.random() * 300000) - 100000,
         status: statuses[Math.floor(Math.random() * statuses.length)],
         violations: Math.floor(Math.random() * 20) + 1,
-        // Financial metrics
+        // Enhanced financial metrics
         balance,
         equity,
         margin,
@@ -131,14 +196,24 @@ export default function DemoPage() {
         marginLevel: margin > 0 ? ((equity / margin) * 100).toFixed(2) : '0',
         leverage: `1:${Math.floor(Math.random() * 400) + 100}`,
         openPositions: Math.floor(Math.random() * 50) + 1,
-        totalTrades: Math.floor(Math.random() * 1000) + 100,
+        totalTrades: Math.floor(Math.random() * 5000) + 500,
         winRate: Math.floor(Math.random() * 30) + 40,
         avgProfit: Math.floor(Math.random() * 500) + 50,
         avgLoss: Math.floor(Math.random() * 300) + 100,
         maxDrawdown: Math.floor(Math.random() * 30) + 10,
-        // Chart data
+        // New comprehensive metrics
+        totalTurnover,
+        dailyVolume,
+        spreadCost,
+        profitPerMillion: parseFloat(profitPerMillion),
+        monthlyPnL: Math.floor(Math.random() * 100000) - 50000,
+        averageTradeSize: Math.floor(Math.random() * 50000) + 10000,
+        // All chart data
         equityCurve,
-        exposureData,
+        cashflowData,
+        hourlyVolumeData,
+        spreadAnalysis,
+        profitByInstrument,
         tradeDistribution,
         marketImpactData,
         connectionPatterns,
@@ -208,10 +283,12 @@ export default function DemoPage() {
   ];
 
   const clientMetrics = [
-    { name: 'Total Clients', value: '1,247', change: '+12.5%', icon: '👥' },
-    { name: 'Active Monitoring', value: '1,189', change: '+8.3%', icon: '📊' },
-    { name: 'Alerts Generated', value: '423', change: '-15.2%', icon: '🚨' },
-    { name: 'Reports Created', value: '89', change: '+22.1%', icon: '📄' },
+    { name: 'Total Clients', value: '1,587', change: '+12.5%', icon: '👥', description: 'Active trading accounts' },
+    { name: 'Daily Volume', value: '$45.2M', change: '+18.7%', icon: '💹', description: 'Total trading volume today' },
+    { name: 'Monthly Revenue', value: '$720K', change: '+15.8%', icon: '💰', description: 'Revenue this month' },
+    { name: 'Net Profit', value: '$310K', change: '+22.1%', icon: '📈', description: 'Net profit this month' },
+    { name: 'Spread Revenue', value: '$156K', change: '+8.9%', icon: '💎', description: 'Revenue from spreads' },
+    { name: 'Risk Alerts', value: '23', change: '-65.2%', icon: '🚨', description: 'Critical risk alerts today' },
   ];
 
   return (
@@ -379,14 +456,16 @@ export default function DemoPage() {
               className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-blue-500 focus:outline-none"
             >
               <option value="risk">Risk Analysis</option>
-              <option value="activity">Activity Report</option>
+              <option value="activity">Trading Activity</option>
               <option value="performance">Performance Metrics</option>
+              <option value="revenue">Revenue & P&L</option>
+              <option value="instruments">Top Instruments</option>
             </select>
           </div>
         </div>
 
-        {/* Metrics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        {/* Enhanced Metrics Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
           {clientMetrics.map((metric, index) => (
             <motion.div
               key={metric.name}
@@ -404,7 +483,10 @@ export default function DemoPage() {
                 </span>
               </div>
               <div className="text-2xl font-bold text-white mb-1">{metric.value}</div>
-              <div className="text-sm text-gray-400">{metric.name}</div>
+              <div className="text-sm text-gray-400 mb-1">{metric.name}</div>
+              {metric.description && (
+                <div className="text-xs text-gray-500">{metric.description}</div>
+              )}
             </motion.div>
           ))}
         </div>
@@ -444,7 +526,39 @@ export default function DemoPage() {
                   <Legend />
                   <Line type="monotone" dataKey="trades" stroke="#3b82f6" strokeWidth={2} />
                   <Line type="monotone" dataKey="alerts" stroke="#ef4444" strokeWidth={2} />
+                  <Line type="monotone" dataKey="revenue" stroke="#10b981" strokeWidth={2} />
                 </LineChart>
+              ) : reportType === 'revenue' ? (
+                <AreaChart data={generateReportData()}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                  <XAxis dataKey="month" stroke="#9ca3af" />
+                  <YAxis stroke="#9ca3af" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: '#1f2937', border: 'none' }}
+                    formatter={(value: any, name: string) => [`$${Number(value).toLocaleString()}`, name === 'revenue' ? 'Revenue' : name === 'costs' ? 'Costs' : 'Profit']}
+                  />
+                  <Legend />
+                  <Area type="monotone" dataKey="revenue" stackId="1" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} />
+                  <Area type="monotone" dataKey="profit" stackId="2" stroke="#10b981" fill="#10b981" fillOpacity={0.8} />
+                </AreaChart>
+              ) : reportType === 'instruments' ? (
+                <BarChart data={generateReportData()}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                  <XAxis dataKey="symbol" stroke="#9ca3af" />
+                  <YAxis stroke="#9ca3af" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: '#1f2937', border: 'none' }}
+                    formatter={(value: any, name: string) => [
+                      name === 'volume' ? `$${Number(value).toLocaleString()}` : 
+                      name === 'profit' ? `$${Number(value).toLocaleString()}` :
+                      Number(value).toLocaleString(),
+                      name === 'volume' ? 'Volume' : name === 'profit' ? 'Profit' : name === 'trades' ? 'Trades' : 'Avg Spread'
+                    ]}
+                  />
+                  <Legend />
+                  <Bar dataKey="volume" fill="#8b5cf6" />
+                  <Bar dataKey="profit" fill="#10b981" />
+                </BarChart>
               ) : (
                 <BarChart data={generateReportData()}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
@@ -651,6 +765,24 @@ export default function DemoPage() {
                         <h4 className="text-gray-400 text-sm mb-1">Free Margin</h4>
                         <p className="text-2xl font-bold text-white">${selectedSuspicious.freeMargin.toLocaleString()}</p>
                       </div>
+                      <div className="bg-gray-700 rounded-lg p-4">
+                        <h4 className="text-gray-400 text-sm mb-1">Daily Volume</h4>
+                        <p className="text-2xl font-bold text-blue-400">${selectedSuspicious.dailyVolume.toLocaleString()}</p>
+                      </div>
+                      <div className="bg-gray-700 rounded-lg p-4">
+                        <h4 className="text-gray-400 text-sm mb-1">Total Turnover</h4>
+                        <p className="text-2xl font-bold text-purple-400">${selectedSuspicious.totalTurnover.toLocaleString()}</p>
+                      </div>
+                      <div className="bg-gray-700 rounded-lg p-4">
+                        <h4 className="text-gray-400 text-sm mb-1">Profit/Million</h4>
+                        <p className={`text-2xl font-bold ${selectedSuspicious.profitPerMillion >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                          ${selectedSuspicious.profitPerMillion >= 0 ? '+' : ''}${selectedSuspicious.profitPerMillion.toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="bg-gray-700 rounded-lg p-4">
+                        <h4 className="text-gray-400 text-sm mb-1">Spread Cost</h4>
+                        <p className="text-2xl font-bold text-yellow-400">${selectedSuspicious.spreadCost.toLocaleString()}</p>
+                      </div>
                     </div>
                     
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -731,10 +863,10 @@ export default function DemoPage() {
                 {activeTab === 'charts' && (
                   <div className="p-6 overflow-y-auto" style={{ maxHeight: 'calc(80vh - 120px)' }}>
                     <div className="space-y-6">
-                      {/* Equity Curve */}
+                      {/* Enhanced Equity Curve */}
                       <div>
-                        <h4 className="text-white font-medium mb-3">Equity Curve (30 days)</h4>
-                        <div className="h-64 bg-gray-700 rounded-lg p-4">
+                        <h4 className="text-white font-medium mb-3">Equity & Balance Dynamics (90 days)</h4>
+                        <div className="h-80 bg-gray-700 rounded-lg p-4">
                           <ResponsiveContainer width="100%" height="100%">
                             <LineChart data={selectedSuspicious.equityCurve}>
                               <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
@@ -743,41 +875,176 @@ export default function DemoPage() {
                               <Tooltip 
                                 contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
                                 labelStyle={{ color: '#f3f4f6' }}
+                                formatter={(value: any, name: string) => [
+                                  `$${Number(value).toLocaleString()}`, 
+                                  name === 'equity' ? 'Equity' : name === 'balance' ? 'Balance' : name === 'profit' ? 'Daily P&L' : 'Drawdown'
+                                ]}
                               />
+                              <Legend />
                               <Line 
                                 type="monotone" 
                                 dataKey="equity" 
                                 stroke="#10b981" 
                                 strokeWidth={2}
                                 dot={false}
+                                name="Equity"
+                              />
+                              <Line 
+                                type="monotone" 
+                                dataKey="balance" 
+                                stroke="#3b82f6" 
+                                strokeWidth={2}
+                                dot={false}
+                                name="Balance"
+                              />
+                              <Line 
+                                type="monotone" 
+                                dataKey="profit" 
+                                stroke="#f59e0b" 
+                                strokeWidth={1}
+                                dot={false}
+                                name="Daily P&L"
                               />
                             </LineChart>
                           </ResponsiveContainer>
                         </div>
                       </div>
                       
-                      {/* Exposure Pattern */}
+                      {/* Deposit/Withdrawal Dynamics */}
                       <div>
-                        <h4 className="text-white font-medium mb-3">24-Hour Exposure Pattern</h4>
+                        <h4 className="text-white font-medium mb-3">Cash Flow Analysis (30 days)</h4>
                         <div className="h-64 bg-gray-700 rounded-lg p-4">
                           <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={selectedSuspicious.exposureData}>
+                            <BarChart data={selectedSuspicious.cashflowData}>
+                              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                              <XAxis dataKey="day" stroke="#9ca3af" />
+                              <YAxis stroke="#9ca3af" />
+                              <Tooltip 
+                                contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
+                                labelStyle={{ color: '#f3f4f6' }}
+                                formatter={(value: any, name: string) => [`$${Number(value).toLocaleString()}`, name === 'deposits' ? 'Deposits' : name === 'withdrawals' ? 'Withdrawals' : 'Net Flow']}
+                              />
+                              <Legend />
+                              <Bar dataKey="deposits" fill="#10b981" name="Deposits" />
+                              <Bar dataKey="withdrawals" fill="#ef4444" name="Withdrawals" />
+                              <Bar dataKey="netFlow" fill="#3b82f6" name="Net Flow" />
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                      
+                      {/* Hourly Trading Volume */}
+                      <div>
+                        <h4 className="text-white font-medium mb-3">24-Hour Trading Activity</h4>
+                        <div className="h-64 bg-gray-700 rounded-lg p-4">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart data={selectedSuspicious.hourlyVolumeData}>
                               <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                               <XAxis dataKey="hour" stroke="#9ca3af" />
                               <YAxis stroke="#9ca3af" />
                               <Tooltip 
                                 contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
                                 labelStyle={{ color: '#f3f4f6' }}
+                                formatter={(value: any, name: string) => [
+                                  name === 'volume' ? `$${Number(value).toLocaleString()}` : Number(value).toLocaleString(), 
+                                  name === 'volume' ? 'Volume' : name === 'trades' ? 'Trades' : name === 'avgSize' ? 'Avg Size' : 'Exposure'
+                                ]}
                               />
+                              <Legend />
                               <Area 
                                 type="monotone" 
-                                dataKey="exposure" 
+                                dataKey="volume" 
+                                stackId="1" 
                                 stroke="#8b5cf6" 
                                 fill="#8b5cf6" 
                                 fillOpacity={0.6}
+                                name="Volume"
+                              />
+                              <Area 
+                                type="monotone" 
+                                dataKey="trades" 
+                                stackId="2" 
+                                stroke="#10b981" 
+                                fill="#10b981" 
+                                fillOpacity={0.4}
+                                name="Trades"
                               />
                             </AreaChart>
                           </ResponsiveContainer>
+                        </div>
+                      </div>
+                      
+                      {/* Profit by Instrument */}
+                      <div>
+                        <h4 className="text-white font-medium mb-3">Profit by Instrument</h4>
+                        <div className="h-64 bg-gray-700 rounded-lg p-4">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={selectedSuspicious.profitByInstrument} layout="horizontal">
+                              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                              <XAxis type="number" stroke="#9ca3af" />
+                              <YAxis dataKey="name" type="category" stroke="#9ca3af" width={60} />
+                              <Tooltip 
+                                contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
+                                labelStyle={{ color: '#f3f4f6' }}
+                                formatter={(value: any, name: string) => [
+                                  name === 'profit' ? `$${Number(value).toLocaleString()}` : `$${Number(value).toLocaleString()}`,
+                                  name === 'profit' ? 'P&L' : 'Volume'
+                                ]}
+                              />
+                              <Legend />
+                              <Bar dataKey="profit" fill="#10b981" name="P&L" />
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                      
+                      {/* Spread Cost Analysis */}
+                      <div>
+                        <h4 className="text-white font-medium mb-3">Spread Cost & Markout Analysis</h4>
+                        <div className="h-80 bg-gray-700 rounded-lg p-4">
+                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
+                            <div>
+                              <h5 className="text-gray-300 text-sm mb-3">Spread Costs by Symbol</h5>
+                              <ResponsiveContainer width="100%" height="90%">
+                                <BarChart data={selectedSuspicious.spreadAnalysis}>
+                                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                                  <XAxis dataKey="symbol" stroke="#9ca3af" />
+                                  <YAxis stroke="#9ca3af" />
+                                  <Tooltip 
+                                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
+                                    labelStyle={{ color: '#f3f4f6' }}
+                                    formatter={(value: any, name: string) => [
+                                      name === 'spreadPaid' ? `$${Number(value).toLocaleString()}` : 
+                                      name === 'volume' ? `$${Number(value).toLocaleString()}` :
+                                      name === 'avgSpread' ? `${value} pips` : `${value} pips`,
+                                      name === 'spreadPaid' ? 'Spread Cost' : name === 'volume' ? 'Volume' : name === 'avgSpread' ? 'Avg Spread' : 'Markout'
+                                    ]}
+                                  />
+                                  <Bar dataKey="spreadPaid" fill="#f59e0b" name="Spread Cost" />
+                                </BarChart>
+                              </ResponsiveContainer>
+                            </div>
+                            <div>
+                              <h5 className="text-gray-300 text-sm mb-3">Markout Analysis (pips)</h5>
+                              <ResponsiveContainer width="100%" height="90%">
+                                <BarChart data={selectedSuspicious.spreadAnalysis}>
+                                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                                  <XAxis dataKey="symbol" stroke="#9ca3af" />
+                                  <YAxis stroke="#9ca3af" />
+                                  <Tooltip 
+                                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
+                                    labelStyle={{ color: '#f3f4f6' }}
+                                    formatter={(value: any) => [`${value} pips`, 'Markout']}
+                                  />
+                                  <Bar 
+                                    dataKey="markout" 
+                                    fill="#3b82f6" 
+                                    name="Markout"
+                                  />
+                                </BarChart>
+                              </ResponsiveContainer>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

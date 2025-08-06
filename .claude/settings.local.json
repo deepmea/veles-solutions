@@ -30,7 +30,8 @@
       "Bash(npm audit:*)",
       "Bash(npx tsc:*)",
       "Bash(curl:*)",
-      "WebFetch(domain:www.veles.solutions)"
+      "WebFetch(domain:www.veles.solutions)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }
