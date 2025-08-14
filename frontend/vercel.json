@@ -1,5 +1,18 @@
 {
   "framework": "nextjs",
+  "redirects": [
+    {
+      "source": "/((?!mailru-domainFSg7hCoMdzA3lbEd\\.html$).*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "veles.solutions"
+        }
+      ],
+      "destination": "https://www.veles.solutions/$1",
+      "statusCode": 301
+    }
+  ],
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
@@ -49,5 +62,11 @@
     "silent": true
   },
   "cleanUrls": false,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/mailru-domainFSg7hCoMdzA3lbEd.html",
+      "destination": "/mailru-domainFSg7hCoMdzA3lbEd.html"
+    }
+  ]
 }

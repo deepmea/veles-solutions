@@ -7,6 +7,11 @@ const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 const MAX_REQUESTS = 100; // max requests per window
 
 export function middleware(request: NextRequest) {
+  // Skip middleware for Mail.ru verification file
+  if (request.nextUrl.pathname === '/mailru-domainFSg7hCoMdzA3lbEd.html') {
+    return NextResponse.next();
+  }
+  
   // Security headers
   const response = NextResponse.next();
   
@@ -97,7 +102,8 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - mailru-domainFSg7hCoMdzA3lbEd.html (Mail.ru verification)
      */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    '/((?!_next/static|_next/image|favicon.ico|mailru-domainFSg7hCoMdzA3lbEd\\.html).*)',
   ],
 };
