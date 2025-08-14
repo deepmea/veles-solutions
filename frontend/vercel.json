@@ -48,12 +48,6 @@
   "github": {
     "silent": true
   },
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/mailru-domainFSg7hCoMdzA3lbEd.html",
-      "destination": "/mailru-domainFSg7hCoMdzA3lbEd.html"
-    }
-  ]
+  "cleanUrls": false,
+  "trailingSlash": false
 }
