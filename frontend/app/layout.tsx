@@ -53,6 +53,9 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'google-site-verification-code',
+    other: {
+      'mailru-domain': 'FSg7hCoMdzA3lbEd',
+    },
   },
   icons: {
     icon: '/veles-icon.svg',
