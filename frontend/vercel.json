@@ -49,5 +49,11 @@
     "silent": true
   },
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/mailru-domainFSg7hCoMdzA3lbEd.html",
+      "destination": "/mailru-domainFSg7hCoMdzA3lbEd.html"
+    }
+  ]
 }
