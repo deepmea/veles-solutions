@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
 export const metadata: Metadata = {
   title: 'Veles - B2B Risk Management Software for Forex Brokers | MT4/MT5 Integration',
@@ -58,9 +55,9 @@ export const metadata: Metadata = {
     google: 'google-site-verification-code',
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
+    icon: '/veles-icon.svg',
+    shortcut: '/veles-icon.svg',
+    apple: '/veles-icon.svg',
   },
 };
 
@@ -71,7 +68,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="text-body">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -100,35 +97,82 @@ export default function RootLayout({
             }),
           }}
         />
-        <nav className="fixed top-0 w-full bg-gray-900 shadow-lg z-50 border-b border-gray-800">
+        <nav className="fixed top-0 w-full bg-gray-950/95 backdrop-blur-md border-b border-gray-800/50 z-50 shadow-2xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
+            <div className="flex justify-between items-center h-20">
+              {/* Logo Section */}
               <div className="flex items-center">
-                <a href="/" className="flex items-center space-x-2">
-                  <img src="/logo.svg" alt="Veles Logo" className="h-8 w-auto" />
+                <a href="/" className="flex items-center space-x-3 group">
+                  <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-violet-600 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
+                    <svg width="24" height="24" viewBox="0 0 32 32" className="w-6 h-6" xmlns="http://www.w3.org/2000/svg">
+                      <g fill="white">
+                        <rect x="14" y="4" width="4" height="24" rx="2"/>
+                        <path d="M16 8 L24 4 L24 8 L18 11 Z"/>
+                        <path d="M16 8 L8 4 L8 8 L14 11 Z"/>
+                        <path d="M18 16 L26 14 L26 18 L18 20 Z"/>
+                        <path d="M14 16 L6 14 L6 18 L14 20 Z"/>
+                        <path d="M16 24 Q20 28 24 26 L24 28 Q20 30 16 28 Q12 30 8 28 L8 26 Q12 28 16 24 Z"/>
+                        <circle cx="16" cy="16" r="3" fill="#6366f1" opacity="0.9"/>
+                        <circle cx="16" cy="16" r="2" fill="white"/>
+                      </g>
+                    </svg>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-2xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent tracking-tight" style={{ fontWeight: 600 }}>
+                      VELES
+                    </span>
+                    <span className="text-xs text-gray-400 font-medium tracking-wider -mt-1">
+                      RISK MANAGEMENT
+                    </span>
+                  </div>
                 </a>
               </div>
-              <div className="hidden md:flex items-center space-x-8">
-                <a href="#modules" className="text-gray-300 hover:text-white transition-colors">
-                  Modules
+              
+              {/* Navigation Links */}
+              <div className="hidden lg:flex items-center space-x-1">
+                <div className="flex items-center space-x-1 bg-gray-800/30 rounded-xl p-1">
+                  <a href="/#modules" className="nav-link px-4 py-2.5 hover:bg-gray-700/50 rounded-lg text-sm">
+                    Solutions
+                  </a>
+                  <a href="/#demo" className="nav-link px-4 py-2.5 hover:bg-gray-700/50 rounded-lg text-sm">
+                    Platform
+                  </a>
+                  <a href="/#pricing" className="nav-link px-4 py-2.5 hover:bg-gray-700/50 rounded-lg text-sm">
+                    Pricing
+                  </a>
+                  <a href="/contact" className="nav-link px-4 py-2.5 hover:bg-gray-700/50 rounded-lg text-sm">
+                    Contact Us
+                  </a>
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="hidden md:flex items-center space-x-3">
+                <a href="/contact" className="btn-outline text-sm px-5 py-2.5">
+                  Schedule Demo
                 </a>
-                <a href="#demo" className="text-gray-300 hover:text-white transition-colors">
-                  Demo
+                <a href="/demo" className="btn-primary text-sm px-6 py-2.5 shadow-lg hover:shadow-xl hover:shadow-indigo-500/25">
+                  Live Demo
                 </a>
-                <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">
-                  Pricing
-                </a>
-                <a href="#contact" className="text-gray-300 hover:text-white transition-colors">
-                  Contact
-                </a>
-                <a href="/demo" className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md hover:from-blue-500 hover:to-purple-500 transition-all">
-                  Try Demo
-                </a>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <div className="lg:hidden">
+                <div className="flex items-center space-x-3">
+                  <a href="/demo" className="btn-primary text-xs px-4 py-2">
+                    Start Trial
+                  </a>
+                  <button className="text-gray-300 hover:text-white p-2 rounded-lg hover:bg-gray-800/50 transition-all duration-200">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </nav>
-        <main className="pt-16">
+        <main className="pt-20">
           {children}
         </main>
         <footer className="bg-gray-900 text-white py-12">
@@ -141,27 +185,25 @@ export default function RootLayout({
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold mb-4">Product</h4>
-                <ul className="space-y-2 text-gray-400">
-                  <li><a href="#" className="hover:text-white">Modules</a></li>
-                  <li><a href="#" className="hover:text-white">Pricing</a></li>
-                  <li><a href="#" className="hover:text-white">API</a></li>
-                </ul>
-              </div>
-              <div>
                 <h4 className="font-semibold mb-4">Company</h4>
                 <ul className="space-y-2 text-gray-400">
-                  <li><a href="#" className="hover:text-white">About</a></li>
+                  <li><a href="/about" className="hover:text-white">About</a></li>
                   <li><a href="#" className="hover:text-white">Blog</a></li>
-                  <li><a href="#" className="hover:text-white">Careers</a></li>
+                  <li><a href="/careers" className="hover:text-white">Careers</a></li>
                 </ul>
               </div>
               <div>
                 <h4 className="font-semibold mb-4">Support</h4>
                 <ul className="space-y-2 text-gray-400">
-                  <li><a href="#" className="hover:text-white">Documentation</a></li>
-                  <li><a href="#" className="hover:text-white">Contact</a></li>
-                  <li><a href="#" className="hover:text-white">FAQ</a></li>
+                  <li><a href="/contact" className="hover:text-white">Contact</a></li>
+                  <li><a href="/faq" className="hover:text-white">FAQ</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-4">Legal</h4>
+                <ul className="space-y-2 text-gray-400">
+                  <li><a href="/privacy" className="hover:text-white">Privacy Policy</a></li>
+                  <li><a href="/terms" className="hover:text-white">Terms of Use</a></li>
                 </ul>
               </div>
             </div>

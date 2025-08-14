@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   LineChart, Line, AreaChart, Area, BarChart, Bar,
   PieChart, Pie, Cell, ResponsiveContainer,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar
 } from 'recharts';
 
 export default function DemoPage() {
@@ -21,6 +22,7 @@ export default function DemoPage() {
   const [isSearching, setIsSearching] = useState(false);
   const [detectionMode, setDetectionMode] = useState('suspicious');
   const [activeTab, setActiveTab] = useState('chat');
+  const [timePeriod, setTimePeriod] = useState('24h');
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   // Generate demo data based on selections
@@ -74,7 +76,7 @@ export default function DemoPage() {
   };
 
   // Generate enhanced suspicious clients with comprehensive financial data
-  const generateSuspiciousClients = () => {
+  const generateSuspiciousClients = (period = timePeriod) => {
     const names = [
       'John Smith', 'Elena Petrova', 'Michael Chen', 'Sarah Johnson', 'Alex Wong', 'Maria Garcia', 'David Kim', 'Anna Mueller',
       'James Wilson', 'Sofia Kowalski', 'Hiroshi Tanaka', 'Isabella Rodriguez', 'Ahmed Hassan', 'Natasha Volkov', 'Lars Jensen', 
@@ -99,9 +101,11 @@ export default function DemoPage() {
       const spreadCost = Math.floor(Math.random() * 25000) + 2000;
       const profitPerMillion = ((Math.random() - 0.3) * 2000).toFixed(2); // Can be negative
       
-      // Generate comprehensive time-series data
-      const equityCurve = Array.from({ length: 90 }, (_, j) => ({
-        day: j + 1,
+      // Generate comprehensive time-series data based on period
+      const periodDays = period === '24h' ? 1 : period === '7d' ? 7 : period === '30d' ? 30 : 90;
+      const dataPoints = period === '24h' ? 24 : periodDays;
+      const equityCurve = Array.from({ length: dataPoints }, (_, j) => ({
+        day: period === '24h' ? `${j}:00` : j + 1,
         equity: balance + Math.floor(Math.random() * 100000) - 50000 + (j * (Math.random() - 0.5) * 2000),
         balance: balance + Math.floor(Math.random() * 50000) - 25000,
         profit: (Math.random() - 0.4) * 10000,
@@ -282,21 +286,54 @@ export default function DemoPage() {
     { name: 'High Risk', value: 8, color: '#ef4444' },
   ];
 
-  const clientMetrics = [
-    { name: 'Total Clients', value: '1,587', change: '+12.5%', icon: '👥', description: 'Active trading accounts' },
-    { name: 'Daily Volume', value: '$45.2M', change: '+18.7%', icon: '💹', description: 'Total trading volume today' },
-    { name: 'Monthly Revenue', value: '$720K', change: '+15.8%', icon: '💰', description: 'Revenue this month' },
-    { name: 'Net Profit', value: '$310K', change: '+22.1%', icon: '📈', description: 'Net profit this month' },
-    { name: 'Spread Revenue', value: '$156K', change: '+8.9%', icon: '💎', description: 'Revenue from spreads' },
-    { name: 'Risk Alerts', value: '23', change: '-65.2%', icon: '🚨', description: 'Critical risk alerts today' },
-  ];
+  // Dynamic client metrics based on selected client and time period
+  const getClientMetrics = () => {
+    const baseMetrics = {
+      clients: 1587,
+      volume: 45200000,
+      revenue: 720000,
+      profit: 310000,
+      spread: 156000,
+      alerts: 23
+    };
+
+    // Adjust metrics based on time period
+    const periodMultiplier = {
+      '24h': 1,
+      '7d': 7,
+      '30d': 30,
+      '90d': 90
+    }[timePeriod as '24h' | '7d' | '30d' | '90d'] || 1;
+
+    // If a client is selected, show their specific metrics
+    if (selectedSuspicious) {
+      return [
+        { name: 'Client Balance', value: `$${(selectedSuspicious.balance / 1000).toFixed(0)}k`, change: `${selectedSuspicious.profitLoss >= 0 ? '+' : ''}${((selectedSuspicious.profitLoss / selectedSuspicious.balance) * 100).toFixed(1)}%`, icon: '💰', description: 'Current account balance' },
+        { name: 'Daily Volume', value: `$${(selectedSuspicious.dailyVolume / 1000000).toFixed(1)}M`, change: '+18.7%', icon: '💹', description: 'Trading volume today' },
+        { name: 'Total Turnover', value: `$${(selectedSuspicious.totalTurnover / 1000000).toFixed(1)}M`, change: '+15.8%', icon: '📊', description: 'Total trading turnover' },
+        { name: 'Spread Cost', value: `$${(selectedSuspicious.spreadCost / 1000).toFixed(0)}k`, change: '+8.9%', icon: '💎', description: 'Paid spread costs' },
+        { name: 'Risk Score', value: `${selectedSuspicious.riskScore}%`, change: selectedSuspicious.riskScore >= 70 ? '+22.1%' : '-12.5%', icon: '⚠️', description: 'Current risk level' },
+        { name: 'Open Positions', value: `${selectedSuspicious.openPositions}`, change: '-15.2%', icon: '📈', description: 'Active positions' },
+      ];
+    }
+
+    // Show aggregated metrics with period adjustment
+    return [
+      { name: 'Total Clients', value: baseMetrics.clients.toLocaleString(), change: '+12.5%', icon: '👥', description: 'Active trading accounts' },
+      { name: `${timePeriod} Volume`, value: `$${((baseMetrics.volume * periodMultiplier) / 1000000).toFixed(1)}M`, change: '+18.7%', icon: '💹', description: `Trading volume (${timePeriod})` },
+      { name: `${timePeriod} Revenue`, value: `$${((baseMetrics.revenue * periodMultiplier) / 1000).toFixed(0)}K`, change: '+15.8%', icon: '💰', description: `Revenue (${timePeriod})` },
+      { name: `${timePeriod} Profit`, value: `$${((baseMetrics.profit * periodMultiplier) / 1000).toFixed(0)}K`, change: '+22.1%', icon: '📈', description: `Net profit (${timePeriod})` },
+      { name: 'Spread Revenue', value: `$${((baseMetrics.spread * periodMultiplier) / 1000).toFixed(0)}K`, change: '+8.9%', icon: '💎', description: 'Revenue from spreads' },
+      { name: 'Risk Alerts', value: (baseMetrics.alerts * (periodMultiplier === 1 ? 1 : 0.5)).toFixed(0), change: '-65.2%', icon: '🚨', description: 'Critical risk alerts' },
+    ];
+  };
 
   return (
     <div className="min-h-screen bg-gray-950">
       {/* Header */}
       <header className="bg-gray-900 border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div className="flex items-center space-x-4">
               <a href="/" className="text-2xl font-bold">
                 <span className="bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">VELES</span>
@@ -304,7 +341,29 @@ export default function DemoPage() {
               <span className="text-gray-500">|</span>
               <span className="text-gray-400">Demo Cabinet</span>
             </div>
+            
+            {/* Customization Banner */}
+            <div className="bg-indigo-900/20 border border-indigo-700/50 rounded-lg px-4 py-2 flex items-center gap-2">
+              <span className="text-indigo-400">🎨</span>
+              <p className="text-gray-300 text-sm">
+                <span className="text-indigo-400 font-semibold">Fully Customizable</span> - 
+                This is just one example. We can tailor everything to your exact needs.
+              </p>
+            </div>
             <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <span className="text-gray-400 text-sm">Period:</span>
+                <select
+                  value={timePeriod}
+                  onChange={(e) => setTimePeriod(e.target.value)}
+                  className="px-3 py-1 bg-gray-800 border border-gray-700 rounded text-white text-sm focus:border-blue-500 focus:outline-none"
+                >
+                  <option value="24h">24 Hours</option>
+                  <option value="7d">7 Days</option>
+                  <option value="30d">30 Days</option>
+                  <option value="90d">90 Days</option>
+                </select>
+              </div>
               <span className="text-gray-400 text-sm">Demo User</span>
               <button className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors">
                 Exit Demo
@@ -316,6 +375,27 @@ export default function DemoPage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Customization Highlight */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-6 bg-gradient-to-r from-indigo-900/30 to-violet-900/30 rounded-xl p-6 border border-indigo-700/50"
+        >
+          <h3 className="text-lg font-semibold text-white mb-2">🎯 Fully Customizable to Your Workflow</h3>
+          <p className="text-gray-300 text-sm">
+            Every element you see here - dashboards, metrics, alerts, reports, colors, layouts - can be customized to match your exact requirements. 
+            We build the system around YOUR specific risk management needs, not the other way around.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <span className="px-3 py-1 bg-indigo-800/50 text-indigo-300 text-xs rounded-full">Custom Dashboards</span>
+            <span className="px-3 py-1 bg-violet-800/50 text-violet-300 text-xs rounded-full">Your Branding</span>
+            <span className="px-3 py-1 bg-purple-800/50 text-purple-300 text-xs rounded-full">Tailored Metrics</span>
+            <span className="px-3 py-1 bg-blue-800/50 text-blue-300 text-xs rounded-full">Personalized Alerts</span>
+            <span className="px-3 py-1 bg-cyan-800/50 text-cyan-300 text-xs rounded-full">Custom Reports</span>
+          </div>
+        </motion.div>
+        
         {/* Advanced Search Section */}
         <div className="mb-8 bg-gray-800 rounded-xl p-6 border border-gray-700">
           <h2 className="text-xl font-semibold text-white mb-4">AI-Powered Detection System</h2>
@@ -466,7 +546,7 @@ export default function DemoPage() {
 
         {/* Enhanced Metrics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-          {clientMetrics.map((metric, index) => (
+          {getClientMetrics().map((metric, index) => (
             <motion.div
               key={metric.name}
               initial={{ opacity: 0, y: 20 }}
@@ -865,7 +945,7 @@ export default function DemoPage() {
                     <div className="space-y-6">
                       {/* Enhanced Equity Curve */}
                       <div>
-                        <h4 className="text-white font-medium mb-3">Equity & Balance Dynamics (90 days)</h4>
+                        <h4 className="text-white font-medium mb-3">Equity & Balance Dynamics ({timePeriod === '24h' ? '24 hours' : timePeriod === '7d' ? '7 days' : timePeriod === '30d' ? '30 days' : '90 days'})</h4>
                         <div className="h-80 bg-gray-700 rounded-lg p-4">
                           <ResponsiveContainer width="100%" height="100%">
                             <LineChart data={selectedSuspicious.equityCurve}>
@@ -912,7 +992,7 @@ export default function DemoPage() {
                       
                       {/* Deposit/Withdrawal Dynamics */}
                       <div>
-                        <h4 className="text-white font-medium mb-3">Cash Flow Analysis (30 days)</h4>
+                        <h4 className="text-white font-medium mb-3">Cash Flow Analysis ({timePeriod === '24h' ? '24 hours' : timePeriod === '7d' ? '7 days' : timePeriod === '30d' ? '30 days' : '90 days'})</h4>
                         <div className="h-64 bg-gray-700 rounded-lg p-4">
                           <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={selectedSuspicious.cashflowData}>
@@ -1043,6 +1123,204 @@ export default function DemoPage() {
                                   />
                                 </BarChart>
                               </ResponsiveContainer>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Additional Trading Analytics */}
+                      <div className="mt-6">
+                        <h4 className="text-white font-medium mb-3">Trading Performance Metrics</h4>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                          {/* Win/Loss Distribution */}
+                          <div>
+                            <h5 className="text-gray-300 text-sm mb-3">Win/Loss Distribution by Hour</h5>
+                            <div className="h-64 bg-gray-700 rounded-lg p-4">
+                              <ResponsiveContainer width="100%" height="100%">
+                                <BarChart data={selectedSuspicious.hourlyWinLossData || Array.from({ length: 24 }, (_, i) => ({
+                                  hour: `${i}:00`,
+                                  wins: Math.floor(Math.random() * 20) + 5,
+                                  losses: Math.floor(Math.random() * 15) + 3,
+                                  winRate: 50 + Math.random() * 30
+                                }))}>
+                                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                                  <XAxis dataKey="hour" stroke="#9ca3af" />
+                                  <YAxis stroke="#9ca3af" />
+                                  <Tooltip 
+                                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
+                                    labelStyle={{ color: '#f3f4f6' }}
+                                  />
+                                  <Legend />
+                                  <Bar dataKey="wins" fill="#10b981" name="Wins" />
+                                  <Bar dataKey="losses" fill="#ef4444" name="Losses" />
+                                </BarChart>
+                              </ResponsiveContainer>
+                            </div>
+                          </div>
+                          
+                          {/* Trade Duration Analysis */}
+                          <div>
+                            <h5 className="text-gray-300 text-sm mb-3">Trade Duration Distribution</h5>
+                            <div className="h-64 bg-gray-700 rounded-lg p-4">
+                              <ResponsiveContainer width="100%" height="100%">
+                                <PieChart>
+                                  <Pie
+                                    data={[
+                                      { name: '< 1 min', value: selectedSuspicious.scalping || 45, color: '#ef4444' },
+                                      { name: '1-5 min', value: 30, color: '#f59e0b' },
+                                      { name: '5-30 min', value: 15, color: '#3b82f6' },
+                                      { name: '30+ min', value: 10, color: '#10b981' }
+                                    ]}
+                                    cx="50%"
+                                    cy="50%"
+                                    labelLine={false}
+                                    label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
+                                    outerRadius={80}
+                                    fill="#8884d8"
+                                    dataKey="value"
+                                  >
+                                    {[0, 1, 2, 3].map((index) => (
+                                      <Cell key={`cell-${index}`} fill={['#ef4444', '#f59e0b', '#3b82f6', '#10b981'][index]} />
+                                    ))}
+                                  </Pie>
+                                  <Tooltip />
+                                  <Legend />
+                                </PieChart>
+                              </ResponsiveContainer>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Trading Volume Analysis */}
+                      <div className="mt-6">
+                        <h4 className="text-white font-medium mb-3">Volume & Activity Analysis</h4>
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                          {/* Volume by Day of Week */}
+                          <div>
+                            <h5 className="text-gray-300 text-sm mb-3">Weekly Volume Pattern</h5>
+                            <div className="h-48 bg-gray-700 rounded-lg p-4">
+                              <ResponsiveContainer width="100%" height="100%">
+                                <BarChart data={[
+                                  { day: 'Mon', volume: selectedSuspicious.dailyVolume * 0.9 },
+                                  { day: 'Tue', volume: selectedSuspicious.dailyVolume * 1.1 },
+                                  { day: 'Wed', volume: selectedSuspicious.dailyVolume * 1.3 },
+                                  { day: 'Thu', volume: selectedSuspicious.dailyVolume * 1.2 },
+                                  { day: 'Fri', volume: selectedSuspicious.dailyVolume * 0.8 }
+                                ]}>
+                                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                                  <XAxis dataKey="day" stroke="#9ca3af" />
+                                  <YAxis stroke="#9ca3af" />
+                                  <Tooltip 
+                                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
+                                    formatter={(value: any) => [`$${(Number(value) / 1000000).toFixed(2)}M`, 'Volume']}
+                                  />
+                                  <Bar dataKey="volume" fill="#8b5cf6" />
+                                </BarChart>
+                              </ResponsiveContainer>
+                            </div>
+                          </div>
+                          
+                          {/* Average Trade Size */}
+                          <div>
+                            <h5 className="text-gray-300 text-sm mb-3">Average Trade Size Trend</h5>
+                            <div className="h-48 bg-gray-700 rounded-lg p-4">
+                              <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={selectedSuspicious.avgTradeSizeData || Array.from({ length: 7 }, (_, i) => ({
+                                  day: `Day ${i + 1}`,
+                                  avgSize: 50000 + Math.random() * 100000,
+                                  maxSize: 200000 + Math.random() * 300000
+                                }))}>
+                                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                                  <XAxis dataKey="day" stroke="#9ca3af" />
+                                  <YAxis stroke="#9ca3af" />
+                                  <Tooltip 
+                                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
+                                    formatter={(value: any) => [`$${Number(value).toLocaleString()}`, '']}
+                                  />
+                                  <Line type="monotone" dataKey="avgSize" stroke="#10b981" name="Avg Size" />
+                                  <Line type="monotone" dataKey="maxSize" stroke="#ef4444" name="Max Size" strokeDasharray="5 5" />
+                                </LineChart>
+                              </ResponsiveContainer>
+                            </div>
+                          </div>
+                          
+                          {/* Trading Sessions */}
+                          <div>
+                            <h5 className="text-gray-300 text-sm mb-3">Session Activity</h5>
+                            <div className="h-48 bg-gray-700 rounded-lg p-4">
+                              <ResponsiveContainer width="100%" height="100%">
+                                <RadarChart data={[
+                                  { session: 'Asia', activity: 65, profit: 45 },
+                                  { session: 'Europe', activity: 85, profit: 72 },
+                                  { session: 'US', activity: 95, profit: 88 },
+                                  { session: 'Pacific', activity: 40, profit: 35 }
+                                ]}>
+                                  <PolarGrid stroke="#374151" />
+                                  <PolarAngleAxis dataKey="session" stroke="#9ca3af" />
+                                  <PolarRadiusAxis stroke="#9ca3af" />
+                                  <Radar name="Activity" dataKey="activity" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.6} />
+                                  <Radar name="Profit %" dataKey="profit" stroke="#10b981" fill="#10b981" fillOpacity={0.6} />
+                                  <Legend />
+                                </RadarChart>
+                              </ResponsiveContainer>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Detailed Financial Metrics */}
+                      <div className="mt-6">
+                        <h4 className="text-white font-medium mb-3">Financial Performance Details</h4>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                          {/* Monthly P&L Breakdown */}
+                          <div className="bg-gray-700 rounded-lg p-4">
+                            <h5 className="text-gray-300 text-sm mb-3">Monthly P&L Breakdown</h5>
+                            <div className="space-y-2">
+                              {['Trading P&L', 'Spread Costs', 'Commission', 'Swap', 'Net P&L'].map((item, idx) => {
+                                const values = [
+                                  selectedSuspicious.profitLoss,
+                                  -selectedSuspicious.spreadCost,
+                                  -selectedSuspicious.spreadCost * 0.1,
+                                  Math.random() * 1000 - 500,
+                                  selectedSuspicious.profitLoss - selectedSuspicious.spreadCost * 1.1
+                                ];
+                                return (
+                                  <div key={item} className="flex justify-between items-center py-2 border-b border-gray-600">
+                                    <span className="text-white">{item}</span>
+                                    <span className={`font-medium ${values[idx] >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                                      ${values[idx] >= 0 ? '+' : ''}{values[idx].toLocaleString()}
+                                    </span>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                          
+                          {/* Risk Metrics */}
+                          <div className="bg-gray-700 rounded-lg p-4">
+                            <h5 className="text-gray-300 text-sm mb-3">Risk Management Metrics</h5>
+                            <div className="space-y-2">
+                              <div className="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span className="text-white">Sharpe Ratio</span>
+                                <span className="text-blue-400 font-medium">1.85</span>
+                              </div>
+                              <div className="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span className="text-white">Max Daily Loss</span>
+                                <span className="text-red-400 font-medium">-${(selectedSuspicious.balance * 0.08).toFixed(0)}</span>
+                              </div>
+                              <div className="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span className="text-white">Risk/Reward Ratio</span>
+                                <span className="text-green-400 font-medium">1:2.3</span>
+                              </div>
+                              <div className="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span className="text-white">Recovery Factor</span>
+                                <span className="text-yellow-400 font-medium">3.2</span>
+                              </div>
+                              <div className="flex justify-between items-center py-2">
+                                <span className="text-white">Profit Factor</span>
+                                <span className="text-green-400 font-medium">1.67</span>
+                              </div>
                             </div>
                           </div>
                         </div>

@@ -30,10 +30,10 @@ export default function ParticleBackground() {
       color: string;
     }> = [];
 
-    const colors = ['#3B82F6', '#8B5CF6', '#EC4899', '#10B981'];
+    const colors = ['#3B82F6', '#6366F1', '#8B5CF6', '#6D28D9'];
 
     // Create particles
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,

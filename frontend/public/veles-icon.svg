@@ -1,0 +1,30 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="velesGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Veles symbol - stylized version inspired by Slavic symbolism -->
+  <!-- Three-pronged symbol representing the three realms -->
+  <g fill="url(#velesGradient)">
+    <!-- Central vertical line -->
+    <rect x="14" y="4" width="4" height="24" rx="2"/>
+    
+    <!-- Upper branches -->
+    <path d="M16 8 L24 4 L24 8 L18 11 Z"/>
+    <path d="M16 8 L8 4 L8 8 L14 11 Z"/>
+    
+    <!-- Middle branches -->
+    <path d="M18 16 L26 14 L26 18 L18 20 Z"/>
+    <path d="M14 16 L6 14 L6 18 L14 20 Z"/>
+    
+    <!-- Lower curved base -->
+    <path d="M16 24 Q20 28 24 26 L24 28 Q20 30 16 28 Q12 30 8 28 L8 26 Q12 28 16 24 Z"/>
+    
+    <!-- Central circle -->
+    <circle cx="16" cy="16" r="3" fill="#ffffff" opacity="0.9"/>
+    <circle cx="16" cy="16" r="2" fill="url(#velesGradient)"/>
+  </g>
+</svg>

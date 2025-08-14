@@ -1,85 +1,114 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import DemoCharts from '../components/DemoCharts';
-import ParticleBackground from '../components/ParticleBackground';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function HomePage() {
+  const [selectedModule, setSelectedModule] = useState<string | null>(null);
   return (
     <div className="min-h-screen bg-gray-950">
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+      <section className="relative overflow-hidden bg-gray-950">
+        {/* Robot Hand Background with seamless blending */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent" />
+          <div className="absolute right-0 top-0 w-full h-full">
+            <img 
+              src="/robot-hand-analysis.jpg" 
+              alt="" 
+              className="w-full h-full object-cover object-center opacity-100"
+            />
+            {/* Multiple gradient overlays for seamless blending */}
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/60 to-gray-950/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-gray-950/60 via-transparent to-gray-950" />
+          </div>
         </div>
         
-        {/* Hero Infographic Background */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-30">
-          <img src="/hero-infographic.svg" alt="" className="w-full h-full object-cover" />
-        </div>
         
-        {/* Particle Background */}
-        <ParticleBackground />
-        
-        {/* Floating infographics */}
-        <motion.div 
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 0.6, x: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="absolute top-20 left-10 hidden lg:block"
-        >
-          <img src="/risk-analytics.svg" alt="Risk Analytics" className="w-64 h-40" />
-        </motion.div>
-        <motion.div 
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 0.6, x: 0 }}
-          transition={{ duration: 1, delay: 0.7 }}
-          className="absolute top-32 right-10 hidden lg:block"
-        >
-          <img src="/trading-monitor.svg" alt="Trading Monitor" className="w-64 h-40" />
-        </motion.div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-center w-full"
           >
             <div className="mb-8">
-              <h1 className="text-6xl md:text-8xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-gradient">VELES</span>
-              </h1>
-              <p className="text-lg md:text-xl text-gray-400 uppercase tracking-widest">Core System</p>
-            </div>
-            <p className="text-xl md:text-2xl text-gray-300 mb-4 max-w-3xl mx-auto">
-              B2B Risk Management Software for Forex & CFD Brokers
-            </p>
-            <p className="text-lg text-gray-400 mb-2">
-              MT4/MT5 Integration • Multi-Account Detection • Real-time Monitoring
-            </p>
-            <p className="text-sm text-gray-500 mb-8">
-              Professional Risk Management • Since 2006
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href="/demo"
-                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:from-blue-500 hover:to-purple-500 transition-all duration-200"
+              <motion.h1 
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-8xl md:text-[13rem] lg:text-[16rem] mb-8 leading-none" 
+                style={{ 
+                  fontFamily: "Helvetica Neue, Arial, sans-serif", 
+                  fontWeight: 600, 
+                  letterSpacing: "-0.03em",
+                  filter: "drop-shadow(0 10px 30px rgba(99, 102, 241, 0.3))"
+                }}
               >
-                Try Demo Cabinet
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href="#modules"
-                className="px-8 py-4 bg-gray-800 text-white font-semibold rounded-lg shadow-lg hover:bg-gray-700 transition-all duration-200 border border-gray-700"
+                <span className="bg-gradient-to-r from-blue-500 via-indigo-600 to-violet-700 text-transparent bg-clip-text animate-gradient">VELES</span>
+              </motion.h1>
+              
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="text-base md:text-lg lg:text-xl text-gray-300 uppercase tracking-[0.2em] mb-12 font-light"
               >
-                Explore Modules
-              </motion.a>
+                B2B CUSTOMIZABLE RISK SOLUTIONS &<br/>
+                <span className="text-gray-400">AI INTEGRATIONS FOR BROKERAGE COMPANIES</span>
+              </motion.p>
             </div>
+            
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-2xl mx-auto"
+              >
+                <motion.a
+                  whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(99, 102, 241, 0.4)" }}
+                  whileTap={{ scale: 0.98 }}
+                  href="/contact?trial=true"
+                  className="group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-semibold text-base rounded-xl shadow-2xl hover:from-indigo-500 hover:to-violet-500 transition-all duration-300 relative overflow-hidden border border-indigo-500/30"
+                >
+                  <span className="relative z-10 flex items-center justify-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Start Free Trial
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </motion.a>
+                
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  href="/demo"
+                  className="group w-full sm:w-auto px-8 py-4 bg-gray-800/50 backdrop-blur-xl text-white font-semibold text-base rounded-xl shadow-lg hover:bg-gray-700/50 transition-all duration-300 border border-gray-600/50 hover:border-gray-500/70"
+                >
+                  <span className="flex items-center justify-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M12 5.04v2.88m6.36 1.64l-2.04.73M18.32 12l-2.73.69M18.96 16.36l-2.04-.73M16.96 19.32l-.69-2.73M12 18.96v-2.88M5.64 16.36l2.04-.73M1.68 12l2.73.69M1.04 7.64l2.04.73M4.04 4.68l.69 2.73" />
+                    </svg>
+                    View Live Demo
+                  </span>
+                </motion.a>
+                
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  href="/quote"
+                  className="hidden sm:flex w-full sm:w-auto px-8 py-4 text-gray-300 hover:text-white font-semibold text-base rounded-xl transition-all duration-300 border border-gray-600/30 hover:border-gray-500/50 hover:bg-gray-800/30"
+                >
+                  <span className="flex items-center justify-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Schedule Demo
+                  </span>
+                </motion.a>
+              </motion.div>
           </motion.div>
         </div>
       </section>
@@ -112,7 +141,7 @@ export default function HomePage() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-center bg-gray-800/50 rounded-xl p-8 border border-gray-700 hover:border-purple-500 transition-all duration-300"
             >
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+              <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-violet-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
@@ -147,10 +176,10 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="heading-primary text-4xl md:text-5xl text-white mb-4">
               Complete Broker Risk Management Suite
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-lead text-xl text-gray-400 max-w-3xl mx-auto">
               Modular architecture designed for forex brokers, prime brokers, and liquidity providers
             </p>
           </motion.div>
@@ -164,10 +193,7 @@ export default function HomePage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-all duration-300 border border-gray-700 hover:border-blue-500 group relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs rounded-bl-lg">
-                  {module.price}
-                </div>
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-violet-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   {module.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">
@@ -179,7 +205,7 @@ export default function HomePage() {
                 <ul className="space-y-2">
                   {module.features.map((feature, i) => (
                     <li key={i} className="text-gray-500 text-sm flex items-center">
-                      <svg className="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                       {feature}
@@ -189,23 +215,319 @@ export default function HomePage() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="mt-6 w-full py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                  onClick={() => setSelectedModule(selectedModule === module.title ? null : module.title)}
+                  className="mt-6 w-full py-2 bg-gradient-to-r from-indigo-600 to-violet-600 text-white rounded-lg hover:from-indigo-500 hover:to-violet-500 transition-all duration-200"
                 >
-                  Learn More
+                  {selectedModule === module.title ? 'Close' : 'Learn More'}
                 </motion.button>
+                <AnimatePresence>
+                  {selectedModule === module.title && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-4 pt-4 border-t border-gray-700"
+                    >
+                      <div className="space-y-3">
+                        {module.title === 'Risk Analytics' && (
+                          <>
+                            <p className="text-gray-200 text-sm leading-relaxed font-medium">
+                              Advanced AI-Powered Detection
+                            </p>
+                            <p className="text-gray-400 text-sm leading-relaxed">
+                              Our machine learning algorithms analyze trading patterns in real-time to detect:
+                            </p>
+                            <ul className="text-gray-400 text-sm space-y-1 ml-4">
+                              <li className="flex items-start"><span className="text-indigo-400 mr-2">•</span> Suspicious trading activities</li>
+                              <li className="flex items-start"><span className="text-indigo-400 mr-2">•</span> Arbitrage attempts & latency exploitation</li>
+                              <li className="flex items-start"><span className="text-indigo-400 mr-2">•</span> Market manipulation patterns</li>
+                              <li className="flex items-start"><span className="text-indigo-400 mr-2">•</span> High-frequency trading abuse</li>
+                            </ul>
+                            <p className="text-xs text-gray-500 italic mt-2">
+                              Trained on millions of transactions with 99.9% detection accuracy
+                            </p>
+                          </>
+                        )}
+                        {module.title === 'Custom Reports' && (
+                          <>
+                            <p className="text-gray-200 text-sm leading-relaxed font-medium">
+                              Fully Customizable Reporting
+                            </p>
+                            <div className="grid grid-cols-2 gap-2 mt-2">
+                              <div className="bg-gray-800/50 rounded p-2">
+                                <p className="text-xs font-semibold text-indigo-400 mb-1">Configure</p>
+                                <p className="text-xs text-gray-400">Layouts & metrics</p>
+                              </div>
+                              <div className="bg-gray-800/50 rounded p-2">
+                                <p className="text-xs font-semibold text-indigo-400 mb-1">Brand</p>
+                                <p className="text-xs text-gray-400">Your identity</p>
+                              </div>
+                              <div className="bg-gray-800/50 rounded p-2">
+                                <p className="text-xs font-semibold text-indigo-400 mb-1">Export</p>
+                                <p className="text-xs text-gray-400">Any format</p>
+                              </div>
+                              <div className="bg-gray-800/50 rounded p-2">
+                                <p className="text-xs font-semibold text-indigo-400 mb-1">Automate</p>
+                                <p className="text-xs text-gray-400">Scheduled delivery</p>
+                              </div>
+                            </div>
+                          </>
+                        )}
+                        {module.title === 'API Integration' && (
+                          <>
+                            <p className="text-gray-200 text-sm leading-relaxed font-medium">
+                              Seamless Platform Connectivity
+                            </p>
+                            <div className="flex flex-wrap gap-2 mt-2">
+                              <span className="px-2 py-1 bg-blue-900/30 text-blue-400 text-xs rounded">REST API</span>
+                              <span className="px-2 py-1 bg-blue-900/30 text-blue-400 text-xs rounded">WebSockets</span>
+                              <span className="px-2 py-1 bg-blue-900/30 text-blue-400 text-xs rounded">Webhooks</span>
+                            </div>
+                            <p className="text-xs text-gray-400 mt-2">Compatible with:</p>
+                            <p className="text-xs text-gray-500">MT4/MT5 • cTrader • FIX Protocol • Custom Platforms</p>
+                          </>
+                        )}
+                        {module.title === 'AI Assistant' && (
+                          <>
+                            <p className="text-gray-200 text-sm leading-relaxed font-medium">
+                              Intelligent Automation Suite
+                            </p>
+                            <div className="bg-gradient-to-r from-indigo-900/20 to-purple-900/20 rounded-lg p-3 border border-indigo-800/30">
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <span className="text-xs text-gray-400">Predictive Analytics</span>
+                                  <span className="text-xs text-green-400">Active</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <span className="text-xs text-gray-400">Smart Alerts</span>
+                                  <span className="text-xs text-green-400">Active</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <span className="text-xs text-gray-400">Pattern Learning</span>
+                                  <span className="text-xs text-green-400">Active</span>
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Live Analytics Preview Section */}
+      <section className="py-20 bg-gray-950 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-950 to-gray-900 opacity-50" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Powerful Analytics at Your Fingertips
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Real-time insights, predictive analytics, and comprehensive reporting in one unified platform
+            </p>
+          </motion.div>
+
+          {/* Dashboard Preview Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            {/* Financial Overview Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-blue-500 transition-all"
+            >
+              <h3 className="text-2xl font-bold text-white mb-6">Financial Overview</h3>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="bg-gray-800 rounded-lg p-4">
+                  <p className="text-gray-400 text-sm mb-1">Monthly Revenue</p>
+                  <p className="text-2xl font-bold text-green-400">$720,000</p>
+                  <p className="text-xs text-green-400 mt-1">↑ 15.8%</p>
+                </div>
+                <div className="bg-gray-800 rounded-lg p-4">
+                  <p className="text-gray-400 text-sm mb-1">Total Volume</p>
+                  <p className="text-2xl font-bold text-blue-400">$45.2M</p>
+                  <p className="text-xs text-blue-400 mt-1">↑ 18.7%</p>
+                </div>
+                <div className="bg-gray-800 rounded-lg p-4">
+                  <p className="text-gray-400 text-sm mb-1">Active Clients</p>
+                  <p className="text-2xl font-bold text-purple-400">1,587</p>
+                  <p className="text-xs text-purple-400 mt-1">↑ 12.5%</p>
+                </div>
+                <div className="bg-gray-800 rounded-lg p-4">
+                  <p className="text-gray-400 text-sm mb-1">Spread Revenue</p>
+                  <p className="text-2xl font-bold text-yellow-400">$156K</p>
+                  <p className="text-xs text-yellow-400 mt-1">↑ 8.9%</p>
+                </div>
+              </div>
+              <div className="h-48 bg-gray-800 rounded-lg p-4 relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <svg className="w-full h-full" viewBox="0 0 400 200">
+                    <path d="M0,100 Q50,80 100,90 T200,70 T300,85 T400,60" stroke="#10b981" strokeWidth="3" fill="none" opacity="0.8"/>
+                    <path d="M0,120 Q50,100 100,110 T200,95 T300,105 T400,85" stroke="#3b82f6" strokeWidth="3" fill="none" opacity="0.6"/>
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Risk Analytics Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-purple-500 transition-all"
+            >
+              <h3 className="text-2xl font-bold text-white mb-6">Risk Analytics</h3>
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-gray-400">Risk Score</span>
+                  <span className="text-2xl font-bold text-yellow-400">73.2%</span>
+                </div>
+                <div className="w-full bg-gray-800 rounded-full h-3">
+                  <div className="bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 h-3 rounded-full" style={{width: '73.2%'}}></div>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-red-400">23</p>
+                  <p className="text-xs text-gray-400">Critical Alerts</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-yellow-400">156</p>
+                  <p className="text-xs text-gray-400">Under Review</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-green-400">1,408</p>
+                  <p className="text-xs text-gray-400">Clean Clients</p>
+                </div>
+              </div>
+              <div className="bg-gray-800 rounded-lg p-4">
+                <p className="text-sm text-gray-400 mb-2">Top Risk Patterns</p>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-white text-sm">Latency Arbitrage</span>
+                    <span className="text-red-400 text-sm">45 cases</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-white text-sm">Martingale Usage</span>
+                    <span className="text-yellow-400 text-sm">32 cases</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-white text-sm">News Trading</span>
+                    <span className="text-orange-400 text-sm">28 cases</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Interactive Features Showcase */}
+          <div className="bg-gray-900 rounded-2xl p-8 border border-gray-800">
+            <h3 className="text-2xl font-bold text-white mb-6 text-center">Real-Time Trading Activity Monitor</h3>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-gray-300">Live Trading Feed</h4>
+                {[1, 2, 3, 4].map((i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    className="bg-gray-800 rounded-lg p-3 border border-gray-700"
+                  >
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-white font-medium">EURUSD</p>
+                        <p className="text-xs text-gray-400">Client #{1000 + i * 123}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-green-400 font-medium">+{(Math.random() * 100).toFixed(2)} pips</p>
+                        <p className="text-xs text-gray-400">{Math.floor(Math.random() * 60)}s ago</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <div className="bg-gray-800 rounded-lg p-6">
+                <h4 className="text-lg font-semibold text-gray-300 mb-4">Market Impact Analysis</h4>
+                <div className="relative h-64 bg-gray-900 rounded-lg p-4 overflow-hidden">
+                  <div className="h-full flex items-end justify-between gap-1">
+                    {[45, 67, 78, 52, 89, 95, 71, 83, 91, 58, 76, 85, 92, 68, 73].map((height, i) => (
+                      <div key={i} className="flex-1 flex flex-col justify-end">
+                        <div 
+                          className="bg-gradient-to-t from-indigo-600 via-blue-500 to-cyan-400 rounded-t opacity-90 transition-all duration-300 hover:opacity-100"
+                          style={{ height: `${height}%` }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="absolute top-4 left-4 bg-gray-800/95 backdrop-blur-sm rounded-lg px-3 py-2">
+                    <p className="text-2xl font-bold text-white">87%</p>
+                    <p className="text-xs text-gray-400">Detection Rate</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-gray-300">Server Execution Speed</h4>
+                <div className="space-y-3">
+                  <div>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-gray-400 text-sm">London (LD4)</span>
+                      <span className="text-green-400 text-sm font-bold">49ms</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full" style={{width: '96%'}}></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-gray-400 text-sm">New York (NY4)</span>
+                      <span className="text-green-400 text-sm">52ms</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full" style={{width: '94%'}}></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-gray-400 text-sm">Tokyo (TY3)</span>
+                      <span className="text-blue-400 text-sm">67ms</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div className="bg-gradient-to-r from-blue-500 to-blue-400 h-2 rounded-full" style={{width: '86%'}}></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-gray-400 text-sm">Trade Server Response</span>
+                      <span className="text-yellow-400 text-sm">91ms</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div className="bg-gradient-to-r from-yellow-500 to-yellow-400 h-2 rounded-full" style={{width: '75%'}}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Real-time Monitoring Section */}
       <section className="py-20 bg-gray-950 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 -left-4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob"></div>
-          <div className="absolute top-0 -right-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-4000"></div>
-        </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0 }}
@@ -221,6 +543,63 @@ export default function HomePage() {
             </p>
           </motion.div>
           
+          {/* Before/After VELES Implementation Chart */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-8"
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold text-white">Impact of VELES Implementation</h3>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-red-500 rounded"></div>
+                  <span className="text-xs text-gray-400">Before VELES</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-green-500 rounded"></div>
+                  <span className="text-xs text-gray-400">After VELES</span>
+                </div>
+              </div>
+            </div>
+            <div className="h-48 bg-gray-900 rounded-lg p-4 relative">
+              <div className="absolute left-4 top-4 text-xs text-gray-500">Risk Events per Day</div>
+              <div className="absolute right-4 top-4 bg-green-900/30 text-green-400 px-2 py-1 rounded text-xs font-bold">-73% reduction</div>
+              <div className="h-full pt-8 flex items-end justify-between gap-2">
+                {[
+                  { before: 85, after: 23 },
+                  { before: 92, after: 28 },
+                  { before: 78, after: 18 },
+                  { before: 95, after: 31 },
+                  { before: 88, after: 25 },
+                  { before: 91, after: 22 },
+                  { before: 83, after: 19 },
+                  { before: 90, after: 26 },
+                  { before: 87, after: 21 },
+                  { before: 94, after: 24 },
+                  { before: 89, after: 20 },
+                  { before: 86, after: 23 }
+                ].map((data, i) => (
+                  <div key={i} className="flex-1 flex flex-col justify-end gap-1">
+                    <div className="relative flex flex-col justify-end h-full gap-1">
+                      <div 
+                        className="bg-gradient-to-t from-red-600 to-red-400 rounded-t opacity-60"
+                        style={{ height: `${data.before}%` }}
+                      />
+                      <div 
+                        className="bg-gradient-to-t from-green-600 to-green-400 rounded-t absolute bottom-0 w-full"
+                        style={{ height: `${data.after}%` }}
+                      />
+                    </div>
+                    {i % 3 === 0 && <span className="text-xs text-gray-600 text-center mt-1">{i + 1}</span>}
+                  </div>
+                ))}
+              </div>
+              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-xs text-gray-500">Months</div>
+            </div>
+          </motion.div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
             {metrics.map((metric, index) => (
               <motion.div
@@ -240,15 +619,17 @@ export default function HomePage() {
                   <span className="text-3xl font-bold text-white">{metric.value}</span>
                   <span className="ml-2 text-gray-500">{metric.unit}</span>
                 </div>
-                <div className="mt-4 h-20">
-                  <svg className="w-full h-full" viewBox="0 0 100 40">
-                    <polyline
-                      fill="none"
-                      stroke={metric.trend === 'up' ? '#10b981' : '#ef4444'}
-                      strokeWidth="2"
-                      points={metric.sparkline}
-                    />
-                  </svg>
+                <div className="mt-4 h-16 bg-gray-900 rounded p-2">
+                  <div className="h-full flex items-end justify-between gap-0.5">
+                    {[40, 45, 38, 52, 48, 61, 58, 65, 70, 68, 75, 72].map((height, i) => (
+                      <div key={i} className="flex-1">
+                        <div 
+                          className={`rounded-sm transition-all duration-300 ${metric.trend === 'up' ? 'bg-gradient-to-t from-green-600 to-green-400' : 'bg-gradient-to-t from-red-600 to-red-400'}`}
+                          style={{ height: `${height}%`, opacity: 0.7 + (i / 30) }}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -271,10 +652,250 @@ export default function HomePage() {
             <p className="text-xl text-gray-400">
               AI-powered insights and predictive analytics in real-time
             </p>
+            <p className="text-xs text-gray-500 italic mt-2">
+              * Selected charts shown. Data is for demonstration purposes only.
+            </p>
           </motion.div>
           <div className="bg-gray-900 rounded-2xl p-8 border border-gray-700">
             <DemoCharts />
           </div>
+        </div>
+      </section>
+
+      {/* Advanced Analytics Features */}
+      <section className="py-20 bg-gray-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Advanced Analytics & Reporting
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Deep insights into every aspect of your trading operations
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Spread Analysis */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="bg-gray-900 rounded-2xl p-6 border border-gray-800"
+            >
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center mr-4">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white">Spread Cost Analytics</h3>
+              </div>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">EURUSD</span>
+                  <div className="text-right">
+                    <span className="text-white font-medium">$45,230</span>
+                    <span className="text-xs text-gray-500 ml-2">0.8 pips</span>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">GBPUSD</span>
+                  <div className="text-right">
+                    <span className="text-white font-medium">$32,180</span>
+                    <span className="text-xs text-gray-500 ml-2">1.2 pips</span>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">GOLD</span>
+                  <div className="text-right">
+                    <span className="text-white font-medium">$28,950</span>
+                    <span className="text-xs text-gray-500 ml-2">2.1 pips</span>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 pt-4 border-t border-gray-800">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">Total Spread Cost</span>
+                  <span className="text-2xl font-bold text-yellow-400">$156,720</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Profit Per Million */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="bg-gray-900 rounded-2xl p-6 border border-gray-800"
+            >
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-4">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white">Profit per Million</h3>
+              </div>
+              <div className="bg-gray-800 rounded-lg p-4 mb-4">
+                <div className="flex items-baseline justify-between mb-2">
+                  <span className="text-gray-400">Average P/M</span>
+                  <span className="text-3xl font-bold text-green-400">+$1,247</span>
+                </div>
+                <div className="w-full bg-gray-700 rounded-full h-2">
+                  <div className="bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 h-2 rounded-full relative">
+                    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg" style={{right: '75%'}}></div>
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center">
+                  <p className="text-2xl font-bold text-green-400">68%</p>
+                  <p className="text-xs text-gray-400">Profitable Clients</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-2xl font-bold text-blue-400">$892</p>
+                  <p className="text-xs text-gray-400">Median P/M</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Markout Analysis */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="bg-gray-900 rounded-2xl p-6 border border-gray-800"
+            >
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-violet-600 rounded-lg flex items-center justify-center mr-4">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white">Markout Analysis</h3>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between mb-1">
+                    <span className="text-gray-400 text-sm">1-second markout</span>
+                    <span className="text-white text-sm">-0.3 pips</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div className="bg-purple-500 h-2 rounded-full" style={{width: '15%'}}></div>
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between mb-1">
+                    <span className="text-gray-400 text-sm">5-second markout</span>
+                    <span className="text-white text-sm">+0.8 pips</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div className="bg-purple-500 h-2 rounded-full" style={{width: '65%'}}></div>
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between mb-1">
+                    <span className="text-gray-400 text-sm">30-second markout</span>
+                    <span className="text-white text-sm">+1.2 pips</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div className="bg-purple-500 h-2 rounded-full" style={{width: '85%'}}></div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4 text-center">
+                <p className="text-xs text-gray-400">Average impact on spread revenue</p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Trading Volume Heatmap */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mt-12 bg-gray-900 rounded-2xl p-8 border border-gray-800"
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold text-white">Trading Activity Heat Map</h3>
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-400">24h Volume:</span>
+                <span className="text-lg font-semibold text-green-400">$45.2M</span>
+              </div>
+            </div>
+            
+            {/* Compact time-based heatmap */}
+            <div className="space-y-4">
+              {['Asian Session', 'European Session', 'US Session'].map((session, sIdx) => (
+                <div key={session} className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-300">{session}</span>
+                    <span className="text-xs text-gray-500">
+                      {sIdx === 0 ? '00:00-08:00' : sIdx === 1 ? '08:00-16:00' : '16:00-24:00'}
+                    </span>
+                  </div>
+                  <div className="flex h-8 gap-0.5 rounded-lg overflow-hidden">
+                    {Array.from({ length: 8 }, (_, hour) => {
+                      const actualHour = sIdx * 8 + hour;
+                      const intensity = Math.sin((actualHour / 24) * Math.PI * 2 + sIdx) * 0.5 + 0.5 + Math.random() * 0.2;
+                      return (
+                        <div
+                          key={hour}
+                          className="flex-1 relative group cursor-pointer transition-all duration-200 hover:scale-105"
+                          style={{
+                            background: `linear-gradient(135deg, 
+                              rgba(59, 130, 246, ${intensity * 0.9}), 
+                              rgba(139, 92, 246, ${intensity * 0.7}))`
+                          }}
+                        >
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span className="text-xs font-medium text-white drop-shadow-lg">
+                              {actualHour}:00
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Simplified legend */}
+            <div className="mt-6 flex items-center justify-center gap-8">
+              <div className="flex items-center gap-2">
+                <div className="w-12 h-3 rounded-full bg-gradient-to-r from-blue-500/30 to-blue-500/50"></div>
+                <span className="text-xs text-gray-400">Low</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-12 h-3 rounded-full bg-gradient-to-r from-blue-500/60 to-purple-500/80"></div>
+                <span className="text-xs text-gray-400">High</span>
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* CTA Button after analytics */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mt-12"
+          >
+            <p className="text-gray-400 mb-4">See how Veles can transform your operations</p>
+            <motion.a
+              href="/contact?trial=true"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block px-8 py-4 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-semibold rounded-lg shadow-lg hover:from-indigo-500 hover:to-violet-500 transition-all duration-200"
+            >
+              Start Free Trial
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 
@@ -394,6 +1015,90 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Simple, Transparent Pricing
+            </h2>
+            <p className="text-xl text-gray-400">
+              Professional risk management solutions starting from $1,000 per month
+            </p>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl mx-auto bg-gray-800 rounded-2xl p-8 border border-gray-700"
+          >
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-white mb-2">Enterprise Solutions</h3>
+              <p className="text-gray-400">Tailored to your business needs</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="space-y-3">
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 text-indigo-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-gray-300">Modular pricing based on features</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 text-indigo-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-gray-300">Volume-based discounts available</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 text-indigo-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-gray-300">24/7 technical support included</span>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 text-indigo-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-gray-300">Custom integration services</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 text-indigo-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-gray-300">Fully customizable solutions</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 text-indigo-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-gray-300">Tailored to your workflow</span>
+                </div>
+              </div>
+            </div>
+            <div className="text-center">
+              <p className="text-sm text-gray-500 mb-6">Contact us for a personalized quote based on your requirements</p>
+              <motion.a
+                href="/quote"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block px-8 py-3 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-semibold rounded-lg hover:from-indigo-500 hover:to-violet-500 transition-all duration-200"
+              >
+                Get Custom Quote
+              </motion.a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section id="contact" className="py-20 bg-gray-900 relative overflow-hidden">
         <div className="absolute inset-0">
@@ -412,24 +1117,17 @@ export default function HomePage() {
               From small brokers to Tier-1 institutions
             </p>
             <p className="text-lg text-gray-400 mb-8">
-              Advanced Analytics • Real-time Monitoring • Quick Setup
+              Advanced Analytics • Real-time Monitoring • Customized Setup
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
-                href="/demo"
+                href="/contact?trial=true"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:from-blue-500 hover:to-purple-500 transition-all duration-200"
+                className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-semibold rounded-lg shadow-lg hover:from-indigo-500 hover:to-violet-500 transition-all duration-200"
               >
                 Start Free Trial
               </motion.a>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gray-800 text-white font-semibold rounded-lg shadow-lg hover:bg-gray-700 transition-all duration-200 border border-gray-700"
-              >
-                Download Whitepaper
-              </motion.button>
             </div>
           </motion.div>
         </div>
@@ -448,9 +1146,9 @@ const modules = [
   },
   {
     title: 'Custom Reports',
-    description: 'Build reports from any company data source',
+    description: 'Fully customizable reports and dashboards',
     icon: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>,
-    features: ['Any data source', 'Custom formats', 'Automated delivery', 'Regulatory compliance'],
+    features: ['Any data source', 'Custom layouts', 'Your branding', 'Tailored metrics'],
     price: '$199/mo'
   },
   {
@@ -485,8 +1183,8 @@ const techStack = [
 const stats = [
   { value: '99.9%', label: 'Accuracy Rate' },
   { value: '24/7', label: 'Monitoring' },
-  { value: '19+', label: 'Years Since 2006' },
-  { value: '<50ms', label: 'Response Time' }
+  { value: '18+', label: 'Years Team Experience' },
+  { value: '50+', label: 'Customizable Modules' }
 ];
 
 const apiIntegrations = [
