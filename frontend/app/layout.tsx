@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   verification: {
     google: 'google-site-verification-code',
     other: {
-      'mailru-domain': 'FSg7hCoMdzA3lbEd',
+      'mailru-domain': 'koRnbFulAZA34mhM',
     },
   },
   icons: {
