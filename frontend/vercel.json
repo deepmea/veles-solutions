@@ -11,7 +11,7 @@
   },
   "headers": [
     {
-      "source": "/mailru-domain*.html",
+      "source": "/mailru-domain(.*).html",
       "headers": [
         {
           "key": "Cache-Control",
@@ -65,8 +65,8 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/mailru-domain:match*.html",
-      "destination": "/api/mailru/mailru-domain:match*.html"
+      "source": "/mailru-domain(.+).html",
+      "destination": "/api/mailru/mailru-domain$1.html"
     }
   ]
 }
